@@ -1,47 +1,47 @@
-# Utangulizi wa Kujifunza kwa Kuimarisha na Q-Learning
+# Utangulizi wa Kujifunza kwa Uimarishaji na Q-Learning
 
-![Muhtasari wa kuimarisha katika kujifunza kwa mashine kwenye sketchnote](../../../../translated_images/ml-reinforcement.94024374d63348dbb3571c343ca7ddabef72adac0b8086d47164b769ba3a8a1d.sw.png)
+![Muhtasari wa uimarishaji katika ujifunzaji wa mashine kwa sketchnote](../../../../translated_images/sw/ml-reinforcement.94024374d63348db.webp)
 > Sketchnote na [Tomomi Imura](https://www.twitter.com/girlie_mac)
 
-Kujifunza kwa kuimarisha kunahusisha dhana tatu muhimu: wakala, baadhi ya hali, na seti ya vitendo kwa kila hali. Kwa kutekeleza kitendo katika hali maalum, wakala hupewa tuzo. Fikiria tena mchezo wa kompyuta wa Super Mario. Wewe ni Mario, uko kwenye kiwango cha mchezo, umesimama karibu na ukingo wa mwamba. Juu yako kuna sarafu. Wewe ukiwa Mario, katika kiwango cha mchezo, katika nafasi maalum ... hiyo ndiyo hali yako. Kusonga hatua moja kulia (kitendo) kutakupeleka kwenye ukingo, na hiyo itakupa alama ndogo ya nambari. Hata hivyo, kubonyeza kitufe cha kuruka kutakupa alama na utabaki hai. Hiyo ni matokeo chanya na hiyo inapaswa kukupa alama chanya ya nambari.
+Kujifunza kwa uimarishaji kunahusisha dhana muhimu tatu: wakala, baadhi ya hali, na seti ya vitendo kwa kila hali. Kwa kutekeleza kitendo katika hali iliyotajwa, wakala hupata zawadi. Tena fikiria mchezo wa kompyuta Super Mario. Wewe ni Mario, uko kwenye kiwango cha mchezo, unasimama karibu na kingo ya mto. Juu yako kuna sarafu. Wewe ukiwa Mario, katika kiwango cha mchezo, katika nafasi maalum ... hiyo ni hali yako. Kusonga hatua moja kulia (kitendo) kutakupeleka juu ya kingo, na hiyo itakupatia alama ya chini ya nambari. Hata hivyo, kubonyeza kitufe cha kuruka kungekupa alama na ungebaki hai. Hiyo ni matokeo mazuri na inapaswa kukupatia alama nzuri za nambari.
 
-Kwa kutumia kujifunza kwa kuimarisha na simulator (mchezo), unaweza kujifunza jinsi ya kucheza mchezo ili kuongeza tuzo ambayo ni kubaki hai na kupata alama nyingi iwezekanavyo.
+Kwa kutumia kujifunza kwa uimarishaji na kielelezo (mchezo), unaweza kujifunza jinsi ya kucheza mchezo ili kuongeza zawadi ambayo ni kubaki hai na kupata alama nyingi iwezekanavyo.
 
-[![Utangulizi wa Kujifunza kwa Kuimarisha](https://img.youtube.com/vi/lDq_en8RNOo/0.jpg)](https://www.youtube.com/watch?v=lDq_en8RNOo)
+[![Utangulizi wa Kujifunza kwa Uimarishaji](https://img.youtube.com/vi/lDq_en8RNOo/0.jpg)](https://www.youtube.com/watch?v=lDq_en8RNOo)
 
-> 🎥 Bofya picha hapo juu kumsikiliza Dmitry akijadili Kujifunza kwa Kuimarisha
+> 🎥 Bofya picha hapo juu kusikiliza Dmitry akijadili Kujifunza kwa Uimarishaji
 
-## [Jaribio la kabla ya somo](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/45/)
+## [Mtihani wa kabla ya somo](https://ff-quizzes.netlify.app/en/ml/)
 
-## Mahitaji na Mipangilio
+## Masharti ya awali na Usanidi
 
-Katika somo hili, tutakuwa tukijaribu na baadhi ya nambari katika Python. Unapaswa kuwa na uwezo wa kuendesha nambari ya Jupyter Notebook kutoka somo hili, ama kwenye kompyuta yako au mahali pengine kwenye wingu.
+Katika somo hili, tutajaribu baadhi ya msimbo wa Python. Unapaswa kuwa na uwezo wa kuendesha msimbo wa Jupyter Notebook kutoka somo hili, iwe kwenye kompyuta yako au mahali fulani kwenye wingu.
 
-Unaweza kufungua [notebook ya somo](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/notebook.ipynb) na kupitia somo hili kujenga.
+Unaweza kufungua [daftari la somo](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/notebook.ipynb) na kupitia somo hili kujifunza.
 
-> **Kumbuka:** Ikiwa unafungua nambari hii kutoka kwenye wingu, pia unahitaji kupata faili la [`rlboard.py`](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/rlboard.py), ambalo linatumika katika nambari ya notebook. Ongeza kwenye saraka moja na notebook.
+> **Kumbuka:** Ikiwa unafungua msimbo huu kutoka kwenye wingu, pia unahitaji kupakua faili la [`rlboard.py`](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/rlboard.py), ambalo linatumika kwenye msimbo wa daftari. Liaweke kwenye saraka ile ile kama daftari.
 
 ## Utangulizi
 
-Katika somo hili, tutachunguza ulimwengu wa **[Peter na Mbwa Mwitu](https://en.wikipedia.org/wiki/Peter_and_the_Wolf)**, uliohamasishwa na hadithi ya muziki ya Kirusi, [Sergei Prokofiev](https://en.wikipedia.org/wiki/Sergei_Prokofiev). Tutatumia **Kujifunza kwa Kuimarisha** kumruhusu Peter kuchunguza mazingira yake, kukusanya matofaa matamu na kuepuka kukutana na mbwa mwitu.
+Katika somo hili, tutachunguza dunia ya **[Peter na Wolf](https://en.wikipedia.org/wiki/Peter_and_the_Wolf)**, iliyohamasishwa na hadithi ya muziki na mtunzi kutoka Urusi, [Sergei Prokofiev](https://en.wikipedia.org/wiki/Sergei_Prokofiev). Tutatumia **Kujifunza kwa Uimarishaji** kumruhusu Peter kuchunguza mazingira yake, kukusanya tufaha tamu na kuepuka kukutana na mbwa mwitu.
 
-**Kujifunza kwa Kuimarisha** (RL) ni mbinu ya kujifunza inayoturuhusu kujifunza tabia bora ya **wakala** katika **mazingira** fulani kwa kuendesha majaribio mengi. Wakala katika mazingira haya anapaswa kuwa na **lengo**, lililofafanuliwa na **kazi ya tuzo**.
+**Kujifunza kwa Uimarishaji** (RL) ni mbinu ya kujifunza inayoturuhusu kujifunza tabia bora ya **wakala** katika **mazingira** fulani kwa kufanya majaribio mengi. Wakala katika mazingira haya anapaswa kuwa na **lengo**, linaloelezwa na **kazi ya zawadi**.
 
 ## Mazingira
 
-Kwa urahisi, tuchukulie ulimwengu wa Peter kuwa ubao wa mraba wa ukubwa `width` x `height`, kama hivi:
+Kwa urahisi, tuchukulie dunia ya Peter kuwa safu ya mstatili yenye ukubwa wa `width` x `height`, kama hii:
 
-![Mazingira ya Peter](../../../../translated_images/environment.40ba3cb66256c93fa7e92f6f7214e1d1f588aafa97d266c11d108c5c5d101b6c.sw.png)
+![Mazingiari ya Peter](../../../../translated_images/sw/environment.40ba3cb66256c93f.webp)
 
-Kila seli katika ubao huu inaweza kuwa:
+Kila kisanduku kwenye bamba hili linaweza kuwa:
 
-* **ardhi**, ambayo Peter na viumbe wengine wanaweza kutembea.
-* **maji**, ambayo huwezi kutembea.
-* **mti** au **nyasi**, mahali ambapo unaweza kupumzika.
-* **tofaa**, ambalo linawakilisha kitu ambacho Peter angefurahi kukipata ili kujilisha.
+* **ardhi**, ambayo Peter na viumbe wengine wanaweza kutembea juu yake.
+* **maji**, ambayo wazi hutaweza kutembea juu yake.
+* **mti** au **nyasi**, mahali pa kupumzika.
+* **tufaha**, kinachowakilisha kitu ambacho Peter atafurahia kupata ili kujilisha.
 * **mbwa mwitu**, ambaye ni hatari na anapaswa kuepukwa.
 
-Kuna moduli ya Python tofauti, [`rlboard.py`](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/rlboard.py), ambayo ina nambari ya kufanya kazi na mazingira haya. Kwa sababu nambari hii si muhimu kwa kuelewa dhana zetu, tutaleta moduli na kuitumia kuunda ubao wa mfano (code block 1):
+Kuna moduli tofauti ya Python, [`rlboard.py`](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/rlboard.py), ambayo ina msimbo wa kufanya kazi na mazingira haya. Kwa kuwa msimbo huu hauhitaji kueleweka kwa dhana zetu, tutaleta moduli hii na kuitumia kutengeneza bamba la mfano (kifungu cha msimbo 1):
 
 ```python
 from rlboard import *
@@ -52,63 +52,63 @@ m.randomize(seed=13)
 m.plot()
 ```
 
-Nambari hii inapaswa kuchapisha picha ya mazingira inayofanana na ile hapo juu.
+Msimbo huu unapaswa kuchapisha picha ya mazingira yanayofanana na ile hapo juu.
 
 ## Vitendo na sera
 
-Katika mfano wetu, lengo la Peter litakuwa kupata tofaa, huku akiepuka mbwa mwitu na vikwazo vingine. Ili kufanya hivyo, anaweza kutembea tu hadi apate tofaa.
+Katika mfano wetu, lengo la Peter litakuwa kupata tufaha, huku akiiepuka mbwa mwitu na vikwazo vingine. Kwa kufanya hivyo, anaweza kutembea hadi apate tufaha.
 
-Kwa hivyo, katika nafasi yoyote, anaweza kuchagua kati ya moja ya vitendo vifuatavyo: juu, chini, kushoto na kulia.
+Kwa hivyo, katika nafasi yoyote, anaweza kuchagua moja ya vitendo vifuatavyo: juu, chini, kushoto na kulia.
 
-Tutafafanua vitendo hivyo kama kamusi, na kuziunganisha na jozi za mabadiliko ya kuratibu yanayolingana. Kwa mfano, kusonga kulia (`R`) would correspond to a pair `(1,0)`. (code block 2):
+Tutafafanua vitendo hivyo kama kamusi, na kuviweka kwenye mabadiliko ya viwango vinavyohusiana. Kwa mfano, kusogea kulia (`R`) kutafanana na jozi `(1,0)`. (kifungu cha msimbo 2):
 
 ```python
 actions = { "U" : (0,-1), "D" : (0,1), "L" : (-1,0), "R" : (1,0) }
 action_idx = { a : i for i,a in enumerate(actions.keys()) }
 ```
 
-Kwa muhtasari, mkakati na lengo la hali hii ni kama ifuatavyo:
+Kuhitimisha, mkakati na lengo la sinia hii ni kama ifuatavyo:
 
-- **Mkakati**, wa wakala wetu (Peter) unafafanuliwa na kinachoitwa **sera**. Sera ni kazi inayorejesha kitendo katika hali yoyote iliyotolewa. Katika kesi yetu, hali ya tatizo inawakilishwa na ubao, ikijumuisha nafasi ya sasa ya mchezaji.
+- **Mkakati**, wa wakala wetu (Peter) unafafanuliwa na kinachoitwa **sera**. Sera ni kazi inayorejesha kitendo katika hali yoyote iliyotolewa. Katika kesi yetu, hali ya tatizo inaonyeshwa na bamba, ikiwa ni pamoja na nafasi ya sasa ya mchezaji.
 
-- **Lengo**, la kujifunza kwa kuimarisha ni hatimaye kujifunza sera nzuri ambayo itaturuhusu kutatua tatizo kwa ufanisi. Hata hivyo, kama msingi, tuchukulie sera rahisi zaidi inayoitwa **kutembea kwa nasibu**.
+- **Lengo**, la kujifunza kwa uimarishaji ni hatimaye kujifunza sera nzuri itakayoruhusu kutatua tatizo kwa ufanisi. Hata hivyo, kama msingi, tuchukulie sera rahisi kabisa inayoitwa **kutembea kwa nasibu**.
 
 ## Kutembea kwa nasibu
 
-Kwanza, tutatue tatizo letu kwa kutekeleza mkakati wa kutembea kwa nasibu. Kwa kutembea kwa nasibu, tutachagua kwa nasibu kitendo kinachofuata kutoka kwa vitendo vilivyoruhusiwa, hadi tufikie tofaa (code block 3).
+Hebu kwanza tatua tatizo letu kwa kutekeleza mkakati wa kutembea kwa nasibu. Kwa kutembea kwa nasibu, tutachagua kitendo kijacho kwa bahati kutoka vitendo vinavyoruhusiwa, hadi tufikie tufaha (kifungu cha msimbo 3).
 
-1. Tekeleza kutembea kwa nasibu na nambari hapa chini:
+1. Tekeleza kutembea kwa nasibu kwa msimbo unaofuata:
 
     ```python
     def random_policy(m):
         return random.choice(list(actions))
     
     def walk(m,policy,start_position=None):
-        n = 0 # number of steps
-        # set initial position
+        n = 0 # idadi ya hatua
+        # weka nafasi ya mwanzo
         if start_position:
             m.human = start_position 
         else:
             m.random_start()
         while True:
             if m.at() == Board.Cell.apple:
-                return n # success!
+                return n # mafanikio!
             if m.at() in [Board.Cell.wolf, Board.Cell.water]:
-                return -1 # eaten by wolf or drowned
+                return -1 # kuliwa na mbwa mwitu au kuzama
             while True:
                 a = actions[policy(m)]
                 new_pos = m.move_pos(m.human,a)
                 if m.is_valid(new_pos) and m.at(new_pos)!=Board.Cell.water:
-                    m.move(a) # do the actual move
+                    m.move(a) # fanya mwelekeo halisi
                     break
             n+=1
     
     walk(m,random_policy)
     ```
 
-    Wito kwa `walk` unapaswa kurejesha urefu wa njia inayolingana, ambayo inaweza kutofautiana kutoka kwa kukimbia moja hadi nyingine. 
+    Wito kwa `walk` unapaswa kurejesha urefu wa njia inayohusiana, ambayo inaweza kutofautiana kutoka mara moja hadi nyingine.
 
-1. Endesha jaribio la kutembea mara kadhaa (sema, 100), na uchapishe takwimu zinazotokana (code block 4):
+1. Endesha jaribio la kutembea mara kadhaa (tuseme, 100), na chapisha takwimu zinazotokana (kifungu cha msimbo 4):
 
     ```python
     def print_statistics(policy):
@@ -125,17 +125,17 @@ Kwanza, tutatue tatizo letu kwa kutekeleza mkakati wa kutembea kwa nasibu. Kwa k
     print_statistics(random_policy)
     ```
 
-    Kumbuka kuwa urefu wa wastani wa njia ni karibu hatua 30-40, ambayo ni nyingi, ikizingatiwa kuwa umbali wa wastani hadi tofaa lililo karibu ni karibu hatua 5-6.
+    Kumbuka kuwa urefu wa wastani wa njia ni hatua 30-40, ambayo ni mengi, ikizingatiwa kwamba umbali wa wastani hadi tufaha ulio karibu ni hatua 5-6.
 
-    Unaweza pia kuona jinsi harakati za Peter zinavyoonekana wakati wa kutembea kwa nasibu:
+    Pia unaweza kuona muonekano wa mwendo wa Peter wakati wa kutembea kwa nasibu:
 
     ![Kutembea kwa Nasibu kwa Peter](../../../../8-Reinforcement/1-QLearning/images/random_walk.gif)
 
-## Kazi ya tuzo
+## Kazi ya zawadi
 
-Ili kufanya sera yetu kuwa ya akili zaidi, tunahitaji kuelewa ni hatua gani ni "bora" kuliko nyingine. Ili kufanya hivyo, tunahitaji kufafanua lengo letu.
+Ili kufanya sera yetu kuwa na akili zaidi, tunahitaji kuelewa ni ngapi hatua ni "bora" kuliko nyingine. Kufanya hivyo, tunahitaji kufafanua lengo letu.
 
-Lengo linaweza kufafanuliwa kwa maneno ya **kazi ya tuzo**, ambayo itarejesha thamani fulani ya alama kwa kila hali. Nambari inavyokuwa juu, ndivyo kazi ya tuzo inavyokuwa bora. (code block 5)
+Lengo linaweza kufafanuliwa kwa matumizi ya **kazi ya zawadi**, ambayo itarejesha baadhi ya alama kwa kila hali. Idadi kubwa ya nambari, ni kazi bora ya zawadi. (kifungu cha msimbo 5)
 
 ```python
 move_reward = -0.1
@@ -154,70 +154,70 @@ def reward(m,pos=None):
     return move_reward
 ```
 
-Jambo la kuvutia kuhusu kazi za tuzo ni kwamba katika hali nyingi, *tunapewa tuzo kubwa mwishoni mwa mchezo*. Hii inamaanisha kuwa algoriti yetu inapaswa kwa namna fulani kukumbuka hatua "nzuri" zinazoongoza kwenye tuzo chanya mwishoni, na kuongeza umuhimu wake. Vivyo hivyo, hatua zote zinazoongoza kwenye matokeo mabaya zinapaswa kukatishwa tamaa.
+Jambo la kuvutia kuhusu kazi za zawadi ni kwamba katika kesi nyingi, *tunapewa tu zawadi kubwa mwishoni mwa mchezo*. Hii inamaanisha kuwa algoriti yetu inapaswa kukumbuka "hatua nzuri" zinazosababisha zawadi nzuri mwishoni, na kuongeza umuhimu wake. Vivyo hivyo, hatua zote zinazotuletea matokeo mabaya zinapaswa kuzuiwa.
 
 ## Q-Learning
 
-Algoriti ambayo tutajadili hapa inaitwa **Q-Learning**. Katika algoriti hii, sera inafafanuliwa na kazi (au muundo wa data) unaoitwa **Q-Table**. Inaandika "uzuri" wa kila kitendo katika hali iliyotolewa.
+Algoriti tutakayojadili hapa inaitwa **Q-Learning**. Katika algoriti hii, sera inafafanuliwa na kazi (au muundo wa data) unaoitwa **Meza ya Q**. Inarekodi "ubora" wa kila kitendo katika hali fulani.
 
-Inaitwa Q-Table kwa sababu mara nyingi ni rahisi kuiwakilisha kama meza, au safu nyingi. Kwa kuwa ubao wetu una vipimo vya `width` x `height`, tunaweza kuwakilisha Q-Table kwa kutumia safu ya numpy yenye umbo `width` x `height` x `len(actions)`: (code block 6)
+Inaitwa Meza ya Q kwa sababu mara nyingi ni rahisi kuionyesha kama meza, au safu nyingi za vipimo. Tukiwa na bamba lenye vipimo `width` x `height`, tunaweza kuwakilisha Meza ya Q kwa kutumia numpy array yenye sura `width` x `height` x `len(actions)`: (kifungu cha msimbo 6)
 
 ```python
 Q = np.ones((width,height,len(actions)),dtype=np.float)*1.0/len(actions)
 ```
 
-Kumbuka kwamba tunaanzisha maadili yote ya Q-Table na thamani sawa, katika kesi yetu - 0.25. Hii inalingana na sera ya "kutembea kwa nasibu", kwa sababu hatua zote katika kila hali ni nzuri sawa. Tunaweza kupitisha Q-Table kwa `plot` function in order to visualize the table on the board: `m.plot(Q)`.
+Tazama kuwa tunaanzisha thamani zote za Meza ya Q kwa thamani sawa, katika kesi yetu - 0.25. Hii inahusiana na sera ya "kutembea kwa nasibu", kwa sababu hatua zote katika kila hali ni sawa. Tunaweza kuipasa Meza ya Q kwa kazi ya `plot` ili kukuonyesha meza kwenye bamba: `m.plot(Q)`.
 
-![Peter's Environment](../../../../translated_images/env_init.04e8f26d2d60089e128f21d22e5fef57d580e559f0d5937b06c689e5e7cdd438.sw.png)
+![Mazingira ya Peter](../../../../translated_images/sw/env_init.04e8f26d2d60089e.webp)
 
-In the center of each cell there is an "arrow" that indicates the preferred direction of movement. Since all directions are equal, a dot is displayed.
+Katikati ya kila kisanduku kuna "mshale" unaoashiria mwelekeo unaopendelea wa mwendo. Kwa kuwa mwelekeo yote ni sawa, alama ya doa inaonyeshwa.
 
-Now we need to run the simulation, explore our environment, and learn a better distribution of Q-Table values, which will allow us to find the path to the apple much faster.
+Sasa tunahitaji kuendesha maonyesho, kuchunguza mazingira yetu, na kujifunza sehemu bora ya thamani za Meza ya Q, ambazo zitaturuhusu kupata njia hadi tufaha haraka zaidi.
 
-## Essence of Q-Learning: Bellman Equation
+## Muhtasari wa Q-Learning: Mlinganyo wa Bellman
 
-Once we start moving, each action will have a corresponding reward, i.e. we can theoretically select the next action based on the highest immediate reward. However, in most states, the move will not achieve our goal of reaching the apple, and thus we cannot immediately decide which direction is better.
+Mara tu tunapoanza kusonga, kila kitendo kitaambatana na zawadi inayojitokeza mara moja, yaani tunaweza kuchagua kitendo kijacho kulingana na zawadi ya haraka zaidi. Hata hivyo, katika hali nyingi, hatua itashindwa kufanikisha lengo letu la kufikia tufaha, hivyo hatuwezi kuamua mara moja mwelekeo gani ni bora.
 
-> Remember that it is not the immediate result that matters, but rather the final result, which we will obtain at the end of the simulation.
+> Kumbuka kuwa si matokeo ya mara moja yanayohesabiwa, bali matokeo ya mwisho, ambayo tutayapata mwishoni mwa maonyesho.
 
-In order to account for this delayed reward, we need to use the principles of **[dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming)**, which allow us to think about out problem recursively.
+Ili kuzingatia zawadi hii ya kuchelewa, tunahitaji kutumia kanuni za **[programu ya mabadiliko](https://en.wikipedia.org/wiki/Dynamic_programming)**, ambazo zinatuwezesha kufikiria tatizo letu kwa mzunguko.
 
-Suppose we are now at the state *s*, and we want to move to the next state *s'*. By doing so, we will receive the immediate reward *r(s,a)*, defined by the reward function, plus some future reward. If we suppose that our Q-Table correctly reflects the "attractiveness" of each action, then at state *s'* we will chose an action *a* that corresponds to maximum value of *Q(s',a')*. Thus, the best possible future reward we could get at state *s* will be defined as `max`<sub>a'</sub>*Q(s',a')* (maximum here is computed over all possible actions *a'* at state *s'*).
+Fikiria kuwa sasa tuko katika hali *s*, na tunataka kusonga hadi hali inayofuata *s'*. Kwa kufanya hivyo, tutapokea zawadi ya mara moja *r(s,a)*, inayofafanuliwa na kazi ya zawadi, pamoja na zawadi ya baadaye. Ikiwa tunadhani kuwa Meza yetu ya Q inaonyesha vyema "mvuto" wa kitendo chochote, basi katika hali *s'* tutachagua kitendo *a* kinacholingana na thamani kubwa zaidi ya *Q(s',a')*. hivyo, zawadi bora zaidi ya baadaye ambayo tunaweza kupata katika hali *s* itafafanuliwa kama `max`<sub>a'</sub>*Q(s',a')* (kinachotumiwa hapa ni thamani kubwa zaidi kati ya vitendo vyote vinavyowezekana *a'* katika hali *s'*).
 
-This gives the **Bellman formula** for calculating the value of the Q-Table at state *s*, given action *a*:
+Huu ndio **mlinganyo wa Bellman** kwa kuhesabu thamani ya Meza ya Q katika hali *s*, ikizingatiwa kitendo *a*:
 
-<img src="images/bellman-equation.png"/>
+<img src="../../../../translated_images/sw/bellman-equation.7c0c4c722e5a6b7c.webp"/>
 
-Here γ is the so-called **discount factor** that determines to which extent you should prefer the current reward over the future reward and vice versa.
+Hapa γ ni kinachoitwa **kipimo cha punguzo** kinachobainisha kiwango ambacho unapaswa kupendelea zawadi ya sasa kuliko zawadi ya baadaye na kinyume chake.
 
-## Learning Algorithm
+## Algoriti ya Kujifunza
 
-Given the equation above, we can now write pseudo-code for our learning algorithm:
+Kutokana na mlinganyo hapo juu, sasa tunaweza kuandika pseudokodi kwa algoriti yetu ya kujifunza:
 
-* Initialize Q-Table Q with equal numbers for all states and actions
-* Set learning rate α ← 1
-* Repeat simulation many times
-   1. Start at random position
-   1. Repeat
-        1. Select an action *a* at state *s*
-        2. Execute action by moving to a new state *s'*
-        3. If we encounter end-of-game condition, or total reward is too small - exit simulation  
-        4. Compute reward *r* at the new state
-        5. Update Q-Function according to Bellman equation: *Q(s,a)* ← *(1-α)Q(s,a)+α(r+γ max<sub>a'</sub>Q(s',a'))*
+* Anzisha Meza ya Q na nambari sawa kwa kila hali na kitendo
+* Weka kiwango cha kujifunza α ← 1
+* Rudia maonyesho mara nyingi
+   1. Anza katika nafasi ya nasibu
+   1. Rudia
+        1. Chagua kitendo *a* katika hali *s*
+        2. Tekeleza kitendo kwa kusonga hadi hali mpya *s'*
+        3. Ikiwa tukutana na hali ya mwisho wa mchezo, au jumla ya zawadi ni ndogo sana - toka maonyeshoni  
+        4. Hesabu zawadi *r* katika hali mpya
+        5. Sasisha Kazi ya Q kulingana na mlinganyo wa Bellman: *Q(s,a)* ← *(1-α)Q(s,a)+α(r+γ max<sub>a'</sub>Q(s',a'))*
         6. *s* ← *s'*
-        7. Update the total reward and decrease α.
+        7. Sasisha jumla ya zawadi na punguza α.
 
-## Exploit vs. explore
+## Kutumia vs. kuchunguza
 
-In the algorithm above, we did not specify how exactly we should choose an action at step 2.1. If we are choosing the action randomly, we will randomly **explore** the environment, and we are quite likely to die often as well as explore areas where we would not normally go. An alternative approach would be to **exploit** the Q-Table values that we already know, and thus to choose the best action (with higher Q-Table value) at state *s*. This, however, will prevent us from exploring other states, and it's likely we might not find the optimal solution.
+Katika algoriti hapo juu, hatukufafanua jinsi ilivyo kamili unapaswa kuchagua kitendo katika hatua 2.1. Ikiwa tunachagua kitendo kwa bahati, tutachunguza mazingira kwa bahati, na pia kuna uwezekano mkubwa wa kufa mara nyingi na kuchunguza maeneo ambayo kawaida hatutapita. Njia mbadala itakuwa kutumia thamani za Meza ya Q ambazo tayari tunazijua, na hivyo kuchagua kitendo bora (chenye thamani kubwa ya Meza ya Q) katika hali *s*. Hata hivyo, hii itakuzuia kuchunguza hali nyingine, na kuna uwezekano usipate suluhisho bora kabisa.
 
-Thus, the best approach is to strike a balance between exploration and exploitation. This can be done by choosing the action at state *s* with probabilities proportional to values in the Q-Table. In the beginning, when Q-Table values are all the same, it would correspond to a random selection, but as we learn more about our environment, we would be more likely to follow the optimal route while allowing the agent to choose the unexplored path once in a while.
+Hivyo, njia bora ni kupata usawa kati ya kuchunguza na kutumia. Hii inaweza kufanyika kwa kuchagua kitendo katika hali *s* kwa uwezekano unaolingana na thamani zilizoko katika Meza ya Q. Mwanzo, thamani za Meza ya Q zikiwa sawa zote, itakuwa sawa na uchaguzi wa nasibu, lakini tunapojifunza zaidi kuhusu mazingira yetu, tuna uwezekano mkubwa zaidi wa kufuata njia bora huku tukiruhusu wakala kuchagua njia ambayo haijachunguzwa mara kwa mara.
 
-## Python implementation
+## Utekelezaji wa Python
 
-We are now ready to implement the learning algorithm. Before we do that, we also need some function that will convert arbitrary numbers in the Q-Table into a vector of probabilities for corresponding actions.
+Sasa tuko tayari kutekeleza algoriti ya kujifunza. Kabla ya kufanya hivyo, tunahitaji pia kazi inayobadilisha nambari zozote katika Meza ya Q kuwa sehemu za uwezekano kwa vitendo vinavyolingana.
 
-1. Create a function `probs()`:
+1. Tengeneza kazi `probs()`:
 
     ```python
     def probs(v,eps=1e-4):
@@ -226,16 +226,16 @@ We are now ready to implement the learning algorithm. Before we do that, we also
         return v
     ```
 
-    Tunaongeza `eps` chache kwenye vector ya awali ili kuepuka mgawanyiko kwa 0 katika kesi ya awali, wakati vipengele vyote vya vector ni sawa.
+    Tunaongeza `eps` chache kwenye vector ya awali ili kuepuka kugawanya kwa 0 katika kesi ya awali, wakati vipengele vyote vya vector ni sawa.
 
-Endesha algoriti ya kujifunza kupitia majaribio 5000, pia huitwa **epochs**: (code block 8)
+Endesha algoriti ya kujifunza kupitia majaribio 5000, pia yanayoitwa **epocha**: (kifungu cha msimbo 8)
 ```python
     for epoch in range(5000):
     
-        # Pick initial point
+        # Chagua sehemu ya awali
         m.random_start()
         
-        # Start travelling
+        # Anza kusafiri
         n=0
         cum_reward = 0
         while True:
@@ -243,7 +243,7 @@ Endesha algoriti ya kujifunza kupitia majaribio 5000, pia huitwa **epochs**: (co
             v = probs(Q[x,y])
             a = random.choices(list(actions),weights=v)[0]
             dpos = actions[a]
-            m.move(dpos,check_correctness=False) # we allow player to move outside the board, which terminates episode
+            m.move(dpos,check_correctness=False) # tunaruhusu mchezaji kusogea nje ya ubao, ambayo huumaliza kipindi
             r = reward(m)
             cum_reward += r
             if r==end_reward or cum_reward < -1000:
@@ -256,11 +256,13 @@ Endesha algoriti ya kujifunza kupitia majaribio 5000, pia huitwa **epochs**: (co
             n+=1
 ```
 
-Baada ya kutekeleza algoriti hii, Q-Table inapaswa kusasishwa na maadili ambayo yanafafanua mvuto wa hatua tofauti katika kila hatua. Tunaweza kujaribu kuonyesha Q-Table kwa kuchora vector kwenye kila seli ambayo itaelekeza kwenye mwelekeo unaotakiwa wa harakati. Kwa urahisi, tunachora duara ndogo badala ya kichwa cha mshale.
+Baada ya kutekeleza algoriti hii, Meza ya Q inapaswa kusasishwa na thamani zinazofafanua mvuto wa vitendo tofauti katika kila hatua. Tunaweza kujaribu kuonyesha Meza ya Q kwa kuchora vector katika kila kisanduku inayoelekeza mwelekeo unaotakiwa wa mwendo. Kwa urahisi, tunachora duara ndogo badala ya kichwa cha mshale.
 
-## Kuangalia sera
+<img src="../../../../translated_images/sw/learned.ed28bcd8484b5287.webp"/>
 
-Kwa kuwa Q-Table inaorodhesha "mvuto" wa kila kitendo katika kila hali, ni rahisi kuitumia kufafanua urambazaji bora katika ulimwengu wetu. Katika kesi rahisi zaidi, tunaweza kuchagua kitendo kinacholingana na thamani ya juu zaidi ya Q-Table: (code block 9)
+## Kukagua sera
+
+Kwa kuwa Meza ya Q inaorodhesha "mvuto" wa kitendo chochote katika kila hali, ni rahisi kuitumia kufafanua njia bora ya kuvinjari katika dunia yetu. Katika kesi rahisi, tunaweza kuchagua kitendo kinacholingana na thamani kubwa zaidi ya Meza ya Q: (kifungu cha msimbo 9)
 
 ```python
 def qpolicy_strict(m):
@@ -272,17 +274,18 @@ def qpolicy_strict(m):
 walk(m,qpolicy_strict)
 ```
 
-> Ukijaribu nambari hapo juu mara kadhaa, unaweza kugundua kuwa wakati mwingine inagoma, na unahitaji kubonyeza kitufe cha STOP kwenye notebook ili kuikomesha. Hii inatokea kwa sababu kunaweza kuwa na hali ambapo hali mbili "zinaelekeza" kwa kila mmoja kwa thamani bora ya Q, ambapo wakala huishia kusonga kati ya hali hizo bila kikomo.
+
+> Ikiwa uta jaribu nambari hapo juu mara kadhaa, unaweza kugundua kwamba mara nyingine "inakwama", na unahitaji kubonyeza kitufe cha STOP kwenye daftari kuizuia. Hii hutokea kwa sababu kunaweza kuwa na hali ambazo hali mbili "zinatumia ishara" kati yao kulingana na thamani bora ya Q-Value, ambapo wakala hukaa akiendelea kusogea kati ya hali hizo wasio na kikomo.
 
 ## 🚀Changamoto
 
-> **Kazi 1:** Badilisha `walk` function to limit the maximum length of path by a certain number of steps (say, 100), and watch the code above return this value from time to time.
+> **Kazi 1:** Badilisha kazi ya `walk` ili kuzuia urefu wa njia hadi hatua fulani (semka, 100), na angalia nambari hapo juu kurudisha thamani hii mara kwa mara.
 
-> **Task 2:** Modify the `walk` function so that it does not go back to the places where it has already been previously. This will prevent `walk` from looping, however, the agent can still end up being "trapped" in a location from which it is unable to escape.
+> **Kazi 2:** Badilisha kazi ya `walk` ili isirudi kwenye maeneo ambayo tayari imeshawahi kwenda hapo awali. Hii itazuia `walk` kuzunguka zunguka, lakini, wakala bado anaweza kuishia "kukamatwa" mahali ambapo hawezi kutoka.
 
-## Navigation
+## Uongozaji
 
-A better navigation policy would be the one that we used during training, which combines exploitation and exploration. In this policy, we will select each action with a certain probability, proportional to the values in the Q-Table. This strategy may still result in the agent returning back to a position it has already explored, but, as you can see from the code below, it results in a very short average path to the desired location (remember that `print_statistics` inaendesha simulizi mara 100): (code block 10)
+Sera bora ya uongozaji itakuwa ile tuliyotumia wakati wa mafunzo, inayochanganya matumizi na utafutaji. Katika sera hii, tutachagua kila kitendo kwa uwezekano fulani, kulingana na thamani kwenye Jedwali la Q. Mkakati huu bado unaweza kusababisha wakala kurudi kwenye nafasi ambayo tayari ameisafiri, lakini, kama unavyoweza kuona kutoka kwa nambari hapo chini, hutoa njia fupi sana kwa wastani kuelekea eneo linalotakiwa (kumbuka kwamba `print_statistics` inaendesha majaribio 100): (kifungu cha nambari 10)
 
 ```python
 def qpolicy(m):
@@ -294,26 +297,32 @@ def qpolicy(m):
 print_statistics(qpolicy)
 ```
 
-Baada ya kuendesha nambari hii, unapaswa kupata urefu wa wastani wa njia ndogo sana kuliko hapo awali, katika safu ya hatua 3-6.
+Baada ya kuendesha nambari hii, unapaswa kupata urefu wa njia wa wastani mdogo sana kuliko awali, katika kiwango cha 3-6.
 
 ## Kuchunguza mchakato wa kujifunza
 
-Kama tulivyosema, mchakato wa kujifunza ni usawa kati ya uchunguzi na uchunguzi wa maarifa yaliyopatikana kuhusu muundo wa nafasi ya tatizo. Tumeona kwamba matokeo ya kujifunza (uwezo wa kusaidia wakala kupata njia fupi kwenda kwenye lengo) yameboreshwa, lakini pia ni ya kuvutia kuona jinsi urefu wa wastani wa njia unavyobadilika wakati wa mchakato wa kujifunza:
+Kama tulivyosema, mchakato wa kujifunza ni usawa kati ya utafutaji na matumizi ya maarifa yaliyopatikana kuhusu muundo wa eneo la tatizo. Tumeona kwamba matokeo ya kujifunza (uwezo wa kusaidia wakala kupata njia fupi kuelekea lengo) yameboreshwa, lakini pia ni muhimu kuangalia jinsi urefu wa njia wa wastani unavyojibadilisha wakati wa mchakato wa kujifunza:
 
-## Muhtasari wa Kujifunza
+<img src="../../../../translated_images/sw/lpathlen1.0534784add58d4eb.webp"/>
 
-- **Urefu wa wastani wa njia unaongezeka**. Tunachokiona hapa ni kwamba mwanzoni, urefu wa wastani wa njia unaongezeka. Hii inaweza kuwa kutokana na ukweli kwamba tunapojua chochote kuhusu mazingira, tunatarajiwa kukwama katika hali mbaya, maji au mbwa mwitu. Tunapojifunza zaidi na kuanza kutumia maarifa haya, tunaweza kuchunguza mazingira kwa muda mrefu zaidi, lakini bado hatujui vizuri mahali tofaa yalipo.
+Mafunzo yanaweza kufupishwa kama:
 
-- **Urefu wa njia unapungua, tunapojifunza zaidi**. Mara tu tunapojifunza vya kutosha, inakuwa rahisi kwa wakala kufikia lengo, na urefu wa njia unaanza kupungua. Hata hivyo, bado tuko wazi kwa uchunguzi, kwa hivyo mara nyingi tunatoka kwenye njia bora, na kuchunguza chaguzi mpya, na kufanya njia kuwa ndefu kuliko ilivyo bora.
+- **Urefu wa njia wa wastani unaongezeka**. Tunachoona hapa ni kuwa mwanzoni, urefu wa njia wa wastani unaongezeka. Hii labda ni kwa sababu wakati hatujui chochote kuhusu mazingira, tuna uwezekano wa kukamata katika hali mbaya, kama maji au mbwa mwitu. Tunapoendelea kujifunza na kuanza kutumia maarifa haya, tunaweza kuchunguza mazingira kwa muda mrefu zaidi, lakini bado hatujui vizuri ambapo tufaha ziko.
 
-- **Urefu unaongezeka ghafla**. Tunachokiona pia kwenye grafu hii ni kwamba wakati fulani, urefu uliongezeka ghafla. Hii inaonyesha asili ya mchakato wa stochastic, na kwamba tunaweza wakati fulani "kuharibu" coefficients za Q-Table kwa kuandika tena na maadili mapya. Hii inapaswa kupunguzwa kwa kupunguza kiwango cha kujifunza (kwa mfano, kuelekea mwisho wa mafunzo, tunarekebisha maadili ya Q-Table kwa thamani ndogo).
+- **Urefu wa njia unashuka, tunapoendelea kujifunza**. Mara tunapojifunza vya kutosha, inakuwa rahisi kwa wakala kufikia lengo, na urefu wa njia unaanza kushuka. Hata hivyo, bado tuko wazi kwa utafutaji, hivyo mara nyingi tunatoka kwenye njia bora, na kuchunguza chaguzi mpya, na kufanya njia kuwa ndefu zaidi kuliko ilivyopaswa.
 
-Kwa ujumla, ni muhimu kukumbuka kwamba mafanikio na ubora wa mchakato wa kujifunza hutegemea sana vigezo, kama vile kiwango cha kujifunza, kupungua kwa kiwango cha kujifunza, na sababu ya punguzo. Hizi mara nyingi huitwa **vigezo vya hyper**, ili kuwatofautisha na **vigezo**, ambavyo tunaboresha wakati wa mafunzo (kwa mfano, coefficients za Q-Table). Mchakato wa kupata maadili bora ya vigezo vya hyper unaitwa **uboresha wa vigezo vya hyper**, na unastahili mada tofauti.
+- **Urefu unaongezeka ghafla**. Pia tunavyoona kwenye mchoro huu ni kwamba wakati fulani, urefu uliongezeka ghafla. Hii inaonyesha tabia isiyotabirika ya mchakato, na kwamba tunaweza wakati fulani "kuharibu" viwango vya Jedwali la Q kwa kuvitumia thamani mpya. Hii kwa kawaida inapaswa kupunguzwa kwa kupunguza kiwango cha kujifunza (kwa mfano, mwishoni mwa mafunzo, tunarekebisha thamani za Jedwali la Q kidogo tu).
 
-## [Jaribio la baada ya somo](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/46/)
+Kwa ujumla, ni muhimu kukumbuka kwamba mafanikio na ubora wa mchakato wa kujifunza hutegemea sana vigezo, kama kiwango cha kujifunza, kupungua kwa kiwango cha kujifunza, na kigezo cha punguzo. Hivi mara nyingi huitwa **vigezo vikuu**, kutofautisha na **vigezo**, ambavyo tunairekebisha wakati wa mafunzo (kwa mfano, viwango vya Jedwali la Q). Mchakato wa kutafuta thamani bora za vigezo vikuu huitwa **urekebishaji wa vigezo vikuu**, na ni mada tofauti kabisa.
 
-## Kazi 
-[Dunia Halisi Zaidi](assignment.md)
+## [Jaribio baada ya mihadhara](https://ff-quizzes.netlify.app/en/ml/)
 
-**Kanusho**: 
-Hati hii imetafsiriwa kwa kutumia huduma za tafsiri za AI zinazotegemea mashine. Ingawa tunajitahidi kwa usahihi, tafadhali fahamu kuwa tafsiri za kiotomatiki zinaweza kuwa na makosa au kutokuwepo kwa usahihi. Hati asilia katika lugha yake ya awali inapaswa kuchukuliwa kama chanzo chenye mamlaka. Kwa habari muhimu, tafsiri ya kitaalamu ya binadamu inapendekezwa. Hatutawajibika kwa kutoelewana au tafsiri zisizo sahihi zinazotokana na matumizi ya tafsiri hii.
+## Kazi ya Nyumbani
+[Dunia Yenye Maishazidi Hale Halisi](assignment.md)
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**Kionyozo**:
+Hati hii imetafsiriwa kwa kutumia huduma ya tafsiri ya AI [Co-op Translator](https://github.com/Azure/co-op-translator). Ingawa tunajitahidi kupata usahihi, tafadhali fahamu kwamba tafsiri za kiotomatiki zinaweza kuwa na makosa au upungufu wa usahihi. Hati ya asili katika lugha yake halisi inapaswa kuchukuliwa kama chanzo cha mamlaka. Kwa taarifa muhimu, tafsiri ya kitaalamu inayofanywa na binadamu inapendekezwa. Hatutojibu kwa kuelewa vibaya au tafsiri potofu zinazotokea kutokana na matumizi ya tafsiri hii.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

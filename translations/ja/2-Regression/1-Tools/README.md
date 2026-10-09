@@ -1,120 +1,121 @@
 # PythonとScikit-learnで回帰モデルを始めよう
 
-![Summary of regressions in a sketchnote](../../../../translated_images/ml-regression.4e4f70e3b3ed446e3ace348dec973e133fa5d3680fbc8412b61879507369b98d.ja.png)
+![回帰の概要を示したスケッチノート](../../../../translated_images/ja/ml-regression.4e4f70e3b3ed446e.webp)
 
-> スケッチノート by [Tomomi Imura](https://www.twitter.com/girlie_mac)
+> スケッチノート: [Tomomi Imura](https://www.twitter.com/girlie_mac)
 
-## [プレレクチャークイズ](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/9/)
+## [事前講義クイズ](https://ff-quizzes.netlify.app/en/ml/)
 
 > ### [このレッスンはRでも利用可能です！](../../../../2-Regression/1-Tools/solution/R/lesson_1.html)
 
 ## はじめに
 
-これらの4つのレッスンで、回帰モデルの構築方法を学びます。これが何のためにあるのかについては、すぐに説明します。しかし、何かを始める前に、プロセスを開始するための適切なツールが揃っていることを確認してください！
+この4つのレッスンで、回帰モデルの構築方法を学びます。これらが何のために使われるかをすぐに説明します。その前に、プロセスを始めるために適切なツールが揃っていることを確認しましょう！
 
-このレッスンでは、以下のことを学びます：
+このレッスンでは、以下を学びます:
 
-- ローカル機械学習タスクのためにコンピュータを設定する方法
-- Jupyterノートブックの使用方法
-- Scikit-learnのインストールと使用方法
-- ハンズオンエクササイズで線形回帰を探求する方法
+- ローカルでの機械学習タスクのためにコンピューターの設定を行う方法。
+- Jupyterノートブックの使い方。
+- Scikit-learnの使用方法（インストールを含む）。
+- 実践演習で線形回帰を探究する。
 
 ## インストールと設定
 
-[![ML for beginners - Setup your tools ready to build Machine Learning models](https://img.youtube.com/vi/-DfeD2k2Kj0/0.jpg)](https://youtu.be/-DfeD2k2Kj0 "ML for beginners -Setup your tools ready to build Machine Learning models")
+[![初心者向け機械学習 - 機械学習モデル構築準備のためのツールセットアップ](https://img.youtube.com/vi/-DfeD2k2Kj0/0.jpg)](https://youtu.be/-DfeD2k2Kj0 "初心者向け機械学習 - 機械学習モデル構築準備のためのツールセットアップ")
 
-> 🎥 上の画像をクリックして、コンピュータをML用に設定する短いビデオをご覧ください。
+> 🎥 上の画像をクリックすると、機械学習用コンピューターの設定を解説する短い動画が視聴できます。
 
-1. **Pythonをインストールする**。コンピュータに[Python](https://www.python.org/downloads/)がインストールされていることを確認してください。Pythonは多くのデータサイエンスや機械学習タスクで使用されます。ほとんどのコンピュータシステムには既にPythonがインストールされています。一部のユーザーにとってセットアップを簡単にするための便利な[Python Coding Packs](https://code.visualstudio.com/learn/educators/installers?WT.mc_id=academic-77952-leestott)もあります。
+1. **Pythonをインストール**。[Python](https://www.python.org/downloads/)がコンピューターにインストールされていることを確認してください。Pythonは多くのデータサイエンスや機械学習タスクに利用されます。ほとんどのコンピューターには既にPythonがインストールされています。セットアップが簡単になるように、便利な [Python Coding Packs](https://code.visualstudio.com/learn/educators/installers?WT.mc_id=academic-77952-leestott) も利用可能です。
 
-   ただし、Pythonの使用法によっては、特定のバージョンが必要な場合があります。そのため、[仮想環境](https://docs.python.org/3/library/venv.html)で作業することが便利です。
+   しかし、Pythonの用途によっては異なるバージョンが必要となる場合があり、そのために [仮想環境](https://docs.python.org/3/library/venv.html) を使うことが有効です。
 
-2. **Visual Studio Codeをインストールする**。コンピュータにVisual Studio Codeがインストールされていることを確認してください。基本的なインストール手順については、[Visual Studio Codeのインストール](https://code.visualstudio.com/)に従ってください。このコースではVisual Studio CodeでPythonを使用するので、[Visual Studio CodeのPython開発用の設定](https://docs.microsoft.com/learn/modules/python-install-vscode?WT.mc_id=academic-77952-leestott)についても確認しておくと良いでしょう。
+2. **Visual Studio Codeをインストール**。コンピューターにVisual Studio Codeがインストールされていることを確認してください。基本インストールについては、[Visual Studio Codeをインストールする手順](https://code.visualstudio.com/)に従ってください。このコースではVisual Studio Code上でPythonを使うので、[Python開発用にVisual Studio Codeを設定する方法](https://docs.microsoft.com/learn/modules/python-install-vscode?WT.mc_id=academic-77952-leestott)も確認しておくと良いでしょう。
 
-   > このコレクションの[Learnモジュール](https://docs.microsoft.com/users/jenlooper-2911/collections/mp1pagggd5qrq7?WT.mc_id=academic-77952-leestott)を通してPythonに慣れてください。
+   > このコレクションの [学習モジュール](https://docs.microsoft.com/users/jenlooper-2911/collections/mp1pagggd5qrq7?WT.mc_id=academic-77952-leestott) に取り組みながらPythonに慣れましょう。
    >
-   > [![Setup Python with Visual Studio Code](https://img.youtube.com/vi/yyQM70vi7V8/0.jpg)](https://youtu.be/yyQM70vi7V8 "Setup Python with Visual Studio Code")
+   > [![Visual Studio CodeでPythonをセットアップ](https://img.youtube.com/vi/yyQM70vi7V8/0.jpg)](https://youtu.be/yyQM70vi7V8 "Visual Studio CodeでPythonをセットアップ")
    >
-   > 🎥 上の画像をクリックして、VS Code内でPythonを使用するビデオをご覧ください。
+   > 🎥 上の画像をクリックするとVS Code内でPythonを使う動画が視聴できます。
 
-3. **Scikit-learnをインストールする**。詳細は[こちらの手順](https://scikit-learn.org/stable/install.html)に従ってください。Python 3を使用する必要があるため、仮想環境を使用することをお勧めします。M1 Macにこのライブラリをインストールする場合は、上記のページに特別な指示があります。
+3. **Scikit-learnをインストール**。[こちらの手順](https://scikit-learn.org/stable/install.html)に従ってください。Python 3を使う必要があるため、仮想環境の利用をお勧めします。M1 Macでインストールする場合は、リンク先に特別な指示があります。
 
-4. **Jupyter Notebookをインストールする**。 [Jupyterパッケージ](https://pypi.org/project/jupyter/)をインストールする必要があります。
+4. **Jupyter Notebookをインストール**。[Jupyterパッケージ](https://pypi.org/project/jupyter/)をインストールしてください。
 
-## あなたのML著作環境
+## あなたのML開発環境
 
-**ノートブック**を使用してPythonコードを開発し、機械学習モデルを作成します。このタイプのファイルはデータサイエンティストにとって一般的なツールであり、拡張子`.ipynb`で識別できます。
+ノートブックを使ってPythonコードを書き、機械学習モデルを作成します。この種のファイルはデータサイエンティストに一般的で、拡張子 `.ipynb` で識別できます。
 
-ノートブックは、開発者がコードを書くだけでなく、コードに関するメモやドキュメントを追加することができるインタラクティブな環境であり、実験的または研究指向のプロジェクトに非常に役立ちます。
+ノートブックはインタラクティブな環境で、コードだけでなくメモやドキュメントを書くことができ、実験や研究志向のプロジェクトに非常に役立ちます。
 
-[![ML for beginners - Set up Jupyter Notebooks to start building regression models](https://img.youtube.com/vi/7E-jC8FLA2E/0.jpg)](https://youtu.be/7E-jC8FLA2E "ML for beginners - Set up Jupyter Notebooks to start building regression models")
+[![初心者向け機械学習 - Jupyterノートブックのセットアップで回帰モデルを構築開始](https://img.youtube.com/vi/7E-jC8FLA2E/0.jpg)](https://youtu.be/7E-jC8FLA2E "初心者向け機械学習 - Jupyterノートブックのセットアップで回帰モデルを構築開始")
 
-> 🎥 上の画像をクリックして、このエクササイズを進める短いビデオをご覧ください。
+> 🎥 上の画像をクリックすると、この演習の解説動画が視聴できます。
 
-### エクササイズ - ノートブックを使う
+### 演習 - ノートブックを使ってみる
 
-このフォルダには、_notebook.ipynb_というファイルがあります。
+このフォルダーに _notebook.ipynb_ ファイルがあります。
 
-1. _notebook.ipynb_をVisual Studio Codeで開きます。
+1. Visual Studio Codeで _notebook.ipynb_ を開きます。
 
-   JupyterサーバーがPython 3+で起動します。ノートブックの中には`run`、コードの部分があります。再生ボタンのようなアイコンを選択してコードブロックを実行できます。
+   JupyterサーバーがPython 3+で起動します。ノートブック内には `run` 可能なコードブロックがあります。再生ボタンのようなアイコンを選択してコードブロックを実行できます。
 
-1. `md`アイコンを選択し、マークダウンを少し追加し、次のテキストを追加します **# Welcome to your notebook**。
+2. `md` アイコンを選択し、少しマークダウンを書き、次のテキストを追加します：**# Welcome to your notebook**。
 
    次に、Pythonコードを追加します。
 
-1. コードブロックに**print('hello notebook')**と入力します。
-1. 矢印を選択してコードを実行します。
+3. コードブロックに **print('hello notebook')** と入力します。
+4. 実行矢印を選択してコードを実行します。
 
-   以下の出力が表示されるはずです：
+   出力は次のように表示されるはずです：
 
     ```output
     hello notebook
     ```
 
-![VS Code with a notebook open](../../../../translated_images/notebook.4a3ee31f396b88325607afda33cadcc6368de98040ff33942424260aa84d75f2.ja.jpg)
+![ノートブックが開かれたVS Code](../../../../translated_images/ja/notebook.4a3ee31f396b8832.webp)
 
-コードとコメントを交互に記述してノートブックを自己文書化できます。
+コードにコメントを挟みながらノートブックを自己文書化することもできます。
 
-✅ ウェブ開発者の作業環境とデータサイエンティストの作業環境の違いについて少し考えてみてください。
+✅ ウェブ開発者の作業環境とデータサイエンティストの環境の違いについて少し考えてみましょう。
 
-## Scikit-learnのセットアップ
+## Scikit-learnを使いこなそう
 
-Pythonがローカル環境に設定され、Jupyterノートブックに慣れたところで、次はScikit-learnに慣れていきましょう（発音は `sci` as in `science`）。Scikit-learnはMLタスクを実行するための[広範なAPI](https://scikit-learn.org/stable/modules/classes.html#api-ref)を提供しています。
+Pythonがローカル環境に設定され、Jupyterノートブックに慣れたら、Scikit-learn（`sci`は「サイエンス」の発音に似ています）も同様に使いこなしましょう。Scikit-learnは機械学習タスクをサポートする[豊富なAPI](https://scikit-learn.org/stable/modules/classes.html#api-ref)を提供します。
 
-彼らの[ウェブサイト](https://scikit-learn.org/stable/getting_started.html)によると、「Scikit-learnは、教師あり学習と教師なし学習をサポートするオープンソースの機械学習ライブラリです。また、モデルフィッティング、データ前処理、モデル選択と評価、その他多くのユーティリティのためのさまざまなツールを提供します。」
+[公式サイト](https://scikit-learn.org/stable/getting_started.html)によると、「Scikit-learnは、教師あり学習と教師なし学習をサポートするオープンソースの機械学習ライブラリです。また、モデルフィッティング、データ前処理、モデル選択と評価、その他多くのユーティリティも提供しています。」
 
-このコースでは、Scikit-learnやその他のツールを使用して、いわゆる「伝統的な機械学習」タスクを実行するための機械学習モデルを構築します。ニューラルネットワークやディープラーニングは含まれていませんが、それらについては今後の「AI for Beginners」カリキュラムで詳しく取り上げます。
+このコースでは、Scikit-learnなどのツールを使って、いわゆる「伝統的な機械学習」タスクを実行するモデルを構築します。ニューラルネットワークやディープラーニングは扱わず、後の「初心者向けAI」カリキュラムで詳しく扱います。
 
-Scikit-learnはモデルの構築と評価を簡単に行えるようにします。主に数値データの使用に焦点を当てており、学習ツールとして使用できるいくつかの既成のデータセットも含まれています。また、学生が試すための事前構築されたモデルも含まれています。パッケージ化されたデータを読み込み、基本的なデータを使用してScikit-learnで最初のMLモデルを構築するプロセスを探りましょう。
+Scikit-learnはモデル構築と評価を簡単に行えるよう設計されており、主に数値データを扱い、学習用の既製データセットもいくつか備えています。学生が試せる事前構築モデルも含まれています。まずは、パッケージ済みデータの読み込みと組み込み推定器を使った初めてのMLモデルを基本データで試してみましょう。
 
-## エクササイズ - 初めてのScikit-learnノートブック
+## 演習 - Scikit-learnノートブックで最初のモデルを作る
 
-> このチュートリアルは、Scikit-learnのウェブサイトにある[線形回帰の例](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html#sphx-glr-auto-examples-linear-model-plot-ols-py)に触発されました。
+> このチュートリアルはScikit-learnのウェブサイトにある[線形回帰の例](https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html#sphx-glr-auto-examples-linear-model-plot-ols-py)を参考にしています。
 
-[![ML for beginners - Your First Linear Regression Project in Python](https://img.youtube.com/vi/2xkXL5EUpS0/0.jpg)](https://youtu.be/2xkXL5EUpS0 "ML for beginners - Your First Linear Regression Project in Python")
 
-> 🎥 上の画像をクリックして、このエクササイズを進める短いビデオをご覧ください。
+[![初心者向け機械学習 - Pythonで最初の線形回帰プロジェクト](https://img.youtube.com/vi/2xkXL5EUpS0/0.jpg)](https://youtu.be/2xkXL5EUpS0 "初心者向け機械学習 - Pythonで最初の線形回帰プロジェクト")
 
-このレッスンに関連する_notebook.ipynb_ファイル内のすべてのセルをゴミ箱アイコンを押してクリアします。
+> 🎥 上の画像をクリックすると、この演習を解説する短い動画が視聴できます。
 
-このセクションでは、学習目的でScikit-learnに組み込まれている糖尿病に関する小さなデータセットを使用します。糖尿病患者の治療をテストしたいと考えているとします。機械学習モデルは、変数の組み合わせに基づいて、どの患者が治療に反応しやすいかを判断するのに役立つかもしれません。非常に基本的な回帰モデルでも、視覚化すると、理論的な臨床試験を整理するのに役立つ変数に関する情報を示すかもしれません。
+_notebook.ipynb_ ファイルでは、すべてのセルを「ゴミ箱」アイコンを押してクリアしてください。
 
-✅ 回帰方法には多くの種類があり、どの方法を選ぶかは求める答えによって異なります。ある年齢の人の予想身長を予測したい場合は、線形回帰を使用します。なぜなら、**数値の値**を求めているからです。ある料理がビーガンかどうかを調べたい場合は、**カテゴリの割り当て**を求めているので、ロジスティック回帰を使用します。ロジスティック回帰については後で詳しく学びます。データに対してどのような質問をすることができるか、そしてどの方法が適切かについて少し考えてみてください。
+このセクションでは、学習用にScikit-learnに組み込まれている糖尿病に関する小さなデータセットで作業します。糖尿病患者の治療法をテストする場合を想像してください。機械学習モデルは、複数の変数の組み合わせに基づいて、どの患者が治療により良い反応を示すかを判断するのに役立つかもしれません。とても基本的な回帰モデルでも視覚化することで、理論的な臨床試験のための変数に関する情報が得られるかもしれません。
 
-このタスクを始めましょう。
+✅ 回帰方法には様々なタイプがあり、どれを選ぶかは答えたい質問によります。年齢に対する推定身長など、<strong>数値的な値</strong>を予測したい場合は線形回帰を使います。料理の種類がビーガンかどうかの<strong>カテゴリー割り当て</strong>を知りたい場合はロジスティック回帰を使います。ロジスティック回帰は後で詳しく学びます。データに対してどんな質問をできるか、どの方法が適切か少し考えてみてください。
 
-### ライブラリをインポートする
+では、このタスクを始めましょう。
 
-このタスクのためにいくつかのライブラリをインポートします：
+### ライブラリのインポート
 
-- **matplotlib**。便利な[グラフツール](https://matplotlib.org/)で、ラインプロットを作成するために使用します。
-- **numpy**。 [numpy](https://numpy.org/doc/stable/user/whatisnumpy.html)は、Pythonで数値データを扱うのに便利なライブラリです。
+このタスクのために次のライブラリをインポートします:
+
+- **matplotlib**。便利な[グラフ作成ツール](https://matplotlib.org/)で、折れ線グラフを作るのに使います。
+- **numpy**。[numpy](https://numpy.org/doc/stable/user/whatisnumpy.html)はPythonで数値データを扱うライブラリです。
 - **sklearn**。これは[Scikit-learn](https://scikit-learn.org/stable/user_guide.html)ライブラリです。
 
-タスクを助けるためにいくつかのライブラリをインポートします。
+作業に役立つライブラリをインポートします。
 
-1. 次のコードを入力してインポートを追加します：
+1. 以下のコードを入力してインポートします：
 
    ```python
    import matplotlib.pyplot as plt
@@ -122,26 +123,26 @@ Scikit-learnはモデルの構築と評価を簡単に行えるようにしま�
    from sklearn import datasets, linear_model, model_selection
    ```
 
-   上記では、`matplotlib`, `numpy` and you are importing `datasets`, `linear_model` and `model_selection` from `sklearn`. `model_selection` is used for splitting data into training and test sets.
+   ここでは `matplotlib` と `numpy` をインポートし、`sklearn` からは `datasets` 、 `linear_model` 、 `model_selection` をインポートしています。`model_selection` はデータを訓練用とテスト用に分割するのに使います。
 
-### The diabetes dataset
+### 糖尿病データセット
 
-The built-in [diabetes dataset](https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset) includes 442 samples of data around diabetes, with 10 feature variables, some of which include:
+組み込みの [糖尿病データセット](https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset)は、442のサンプルを含み、10の特徴変数があります。主なものは以下です：
 
-- age: age in years
-- bmi: body mass index
-- bp: average blood pressure
-- s1 tc: T-Cells (a type of white blood cells)
+- age: 年齢（歳）
+- bmi: 体格指数
+- bp: 平均血圧
+- s1 tc: T細胞（白血球の一種）
 
-✅ This dataset includes the concept of 'sex' as a feature variable important to research around diabetes. Many medical datasets include this type of binary classification. Think a bit about how categorizations such as this might exclude certain parts of a population from treatments.
+✅ このデータセットには糖尿病研究で重要な特徴変数として「性別」が含まれています。多くの医療データセットにはこの種の二値分類が含まれます。こうした分類が特定の集団を治療から排除する可能性について少し考えてみてください。
 
-Now, load up the X and y data.
+では、Xとyのデータを読み込みます。
 
-> 🎓 Remember, this is supervised learning, and we need a named 'y' target.
+> 🎓 これは教師あり学習であり、名前付きの「y」ターゲットが必要です。
 
-In a new code cell, load the diabetes dataset by calling `load_diabetes()`. The input `return_X_y=True` signals that `X` will be a data matrix, and `y`は回帰ターゲットになります。
+新しいコードセルで、`load_diabetes()` を使って糖尿病データセットを読み込みます。引数 `return_X_y=True` は `X` がデータ行列、`y` が回帰ターゲットであることを示します。
 
-1. データマトリックスの形状とその最初の要素を表示するためにいくつかのprintコマンドを追加します：
+1. データ行列の形状と最初の要素を表示するために、次のprint文を追加します：
 
     ```python
     X, y = datasets.load_diabetes(return_X_y=True)
@@ -149,9 +150,9 @@ In a new code cell, load the diabetes dataset by calling `load_diabetes()`. The 
     print(X[0])
     ```
 
-    返される応答はタプルです。タプルの最初の2つの値をそれぞれ`X` and `y`に割り当てています。 [タプルについて](https://wikipedia.org/wiki/Tuple)の詳細を学びましょう。
+    返されるのはタプルです。最初の2つの値をそれぞれ `X` と `y` に割り当てています。[タプル](https://wikipedia.org/wiki/Tuple)について学びましょう。
 
-    このデータは10個の要素で構成された配列の442アイテムがあることがわかります：
+    このデータが442項目で、それぞれ10要素の配列で構成されていることがわかります：
 
     ```text
     (442, 10)
@@ -159,39 +160,39 @@ In a new code cell, load the diabetes dataset by calling `load_diabetes()`. The 
     -0.04340085 -0.00259226  0.01990842 -0.01764613]
     ```
 
-    ✅ データと回帰ターゲットの関係について少し考えてみてください。線形回帰は特徴量Xとターゲット変数yの関係を予測します。このドキュメントで糖尿病データセットの[ターゲット](https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset)を見つけることができますか？ターゲットを考えると、このデータセットは何を示しているのでしょうか？
+    ✅ データと回帰ターゲットの関係について少し考えてみましょう。線形回帰は特徴量Xとターゲット変数yの関係を予測します。糖尿病データセットの[ターゲット](https://scikit-learn.org/stable/datasets/toy_dataset.html#diabetes-dataset)はドキュメントで何を示しているでしょうか？このデータセットが示す内容は何でしょう？
 
-2. 次に、このデータセットの一部を選択してプロットするために、データセットの3番目の列を選択します。これは`：` operator to select all rows, and then selecting the 3rd column using the index (2). You can also reshape the data to be a 2D array - as required for plotting - by using `reshape(n_rows, n_columns)`を使用して行うことができます。パラメータの1つが-1の場合、対応する次元は自動的に計算されます。
+2. 次に、データセットの3列目を選択してプロット用のデータを用意します。`:` 操作子で全行を選び、インデックス `2` で3列目を選択します。プロットに必要な2次元配列に変換するには `reshape(n_rows, n_columns)` を使います。 `-1` を指定すると、その次元は自動的に計算されます。
 
    ```python
    X = X[:, 2]
    X = X.reshape((-1,1))
    ```
 
-   ✅ いつでもデータを印刷してその形状を確認してください。
+   ✅ 必要なら都度データの形状をプリントして確認しましょう。
 
-3. データがプロットする準備ができたら、このデータセットの数値間に論理的な分割を見つけるために機械を使用できるかどうかを確認できます。これを行うには、データ（X）とターゲット（y）の両方をテストセットとトレーニングセットに分割する必要があります。Scikit-learnにはこれを簡単に行う方法があります。指定したポイントでテストデータを分割できます。
+3. プロット準備ができたら、データの論理的な分割を機械に判別させてみましょう。そのために、データ(X)とターゲット(y)を訓練用とテスト用に分割します。Scikit-learnはこれを簡単に行える方法があります。任意の点でデータを分割できます。
 
    ```python
    X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size=0.33)
    ```
 
-4. モデルをトレーニングする準備ができました！線形回帰モデルをロードし、Xとyのトレーニングセットを使用して`model.fit()`でトレーニングします：
+4. これでモデルの訓練準備ができました！線形回帰モデルをロードし、`model.fit()` を使ってXとyの訓練セットで学習させましょう：
 
     ```python
     model = linear_model.LinearRegression()
     model.fit(X_train, y_train)
     ```
 
-    ✅ `model.fit()` is a function you'll see in many ML libraries such as TensorFlow
+    ✅ `model.fit()` はTensorFlowなど多くのMLライブラリで使われる関数です。
 
-5. Then, create a prediction using test data, using the function `predict()`。これはデータグループ間に線を引くために使用されます。
+5. 次に `predict()` 関数を使ってテストデータから予測を作成します。これはデータグループの間に線を描くために使います。
 
     ```python
     y_pred = model.predict(X_test)
     ```
 
-6. データをプロットに表示する時が来ました。Matplotlibはこのタスクに非常に便利なツールです。すべてのXとyテストデータの散布図を作成し、モデルのデータグループ間に最も適切な場所に線を引くために予測を使用します。
+6. 最後にデータをプロットしてみましょう。Matplotlibはこの作業に非常に便利なツールです。テスト用のXとyの散布図を作成し、予測を使ってモデルのデータグループ間に最も適切な場所に線を引きます。
 
     ```python
     plt.scatter(X_test, y_test,  color='black')
@@ -202,27 +203,32 @@ In a new code cell, load the diabetes dataset by calling `load_diabetes()`. The 
     plt.show()
     ```
 
-   ![a scatterplot showing datapoints around diabetes](../../../../translated_images/scatterplot.ad8b356bcbb33be68d54050e09b9b7bfc03e94fde7371f2609ae43f4c563b2d7.ja.png)
+   ![糖尿病に関するデータ点の散布図](../../../../translated_images/ja/scatterplot.ad8b356bcbb33be6.webp)
 
-   ✅ ここで何が起こっているのか少し考えてみてください。多くの小さなデータ点の間に一直線が引かれていますが、具体的に何をしているのでしょうか？この線を使用して、新しい見えないデータポイントがプロットのy軸との関係でどこにフィットするべきかを予測できることがわかりますか？このモデルの実際の使用法を言葉で表現してみてください。
 
-おめでとうございます、最初の線形回帰モデルを構築し、それを使用して予測を作成し、プロットに表示しました！
+   ✅ ここで何が起こっているのか少し考えてみてください。直線が多くの小さなデータ点の間を通っていますが、それは正確には何をしているのでしょうか？ この直線を使って、新しい、見たことのないデータ点がプロットのy軸に対してどこに位置するべきか予測できることがわかりますか？ このモデルの実用的な使い道を言葉にしてみましょう。
+
+おめでとうございます、あなたは最初の線形回帰モデルを構築し、それを使って予測を作成し、それをプロットに表示しました！
 
 ---
 ## 🚀チャレンジ
 
-このデータセットから別の変数をプロットしてください。ヒント：この行を編集します：`X = X[:,2]`。このデータセットのターゲットを考えると、糖尿病の進行について何を発見できるでしょうか？
-## [ポストレクチャークイズ](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/10/)
+このデータセットの別の変数をプロットしてみましょう。ヒント：この行を編集してください：`X = X[:,2]`。このデータセットのターゲットを考慮して、糖尿病という病気の進行について何がわかりますか？
+## [講義後クイズ](https://ff-quizzes.netlify.app/en/ml/)
 
-## レビュー＆自己学習
+## 復習と自己学習
 
-このチュートリアルでは、単回帰ではなく、単変量回帰または多重回帰を使用しました。これらの方法の違いについて少し読んでみるか、[このビデオ](https://www.coursera.org/lecture/quantifying-relationships-regression-models/linear-vs-nonlinear-categorical-variables-ai2Ef)を見てみてください。
+このチュートリアルでは、単回帰を使いましたが、多変量回帰や単変量回帰とは異なります。これらの方法の違いについて少し読んでみるか、[この動画](https://www.coursera.org/lecture/quantifying-relationships-regression-models/linear-vs-nonlinear-categorical-variables-ai2Ef)をご覧ください。
 
-回帰の概念についてさらに読み、どのような質問にこの技術で答えることができるか考えてみてください。この[チュートリアル](https://docs.microsoft.com/learn/modules/train-evaluate-regression-models?WT.mc_id=academic-77952-leestott)を受けて、理解を深めてください。
+回帰という概念についてより深く理解し、この技術でどのような疑問に答えられるか考えてみましょう。理解を深めるためにこの[チュートリアル](https://docs.microsoft.com/learn/modules/train-evaluate-regression-models?WT.mc_id=academic-77952-leestott)を受講してください。
 
 ## 課題
 
 [別のデータセット](assignment.md)
 
-**免責事項**:
-この文書は機械翻訳AIサービスを使用して翻訳されています。正確さを期すために努力しておりますが、自動翻訳には誤りや不正確さが含まれる場合があります。原文の言語で書かれた文書を権威ある情報源とみなすべきです。重要な情報については、専門の人間による翻訳を推奨します。この翻訳の使用に起因する誤解や誤った解釈について、当社は一切の責任を負いません。
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

@@ -1,47 +1,47 @@
 # 強化学習とQ学習の紹介
 
-![機械学習における強化の概要をスケッチノートで表現](../../../../translated_images/ml-reinforcement.94024374d63348dbb3571c343ca7ddabef72adac0b8086d47164b769ba3a8a1d.ja.png)
-> スケッチノート: [Tomomi Imura](https://www.twitter.com/girlie_mac)
+![スケッチノートによる機械学習における強化の要約](../../../../translated_images/ja/ml-reinforcement.94024374d63348db.webp)
+> [Tomomi Imura](https://www.twitter.com/girlie_mac)によるスケッチノート
 
-強化学習には、エージェント、状態、各状態ごとの一連のアクションという3つの重要な概念が含まれます。指定された状態でアクションを実行すると、エージェントに報酬が与えられます。コンピュータゲーム「スーパーマリオ」を想像してみてください。あなたはマリオで、崖の端に立っているゲームレベルにいます。上にはコインがあります。あなたがマリオで、特定の位置にいるゲームレベル...それがあなたの状態です。右に一歩進む（アクション）と崖から落ちてしまい、低い数値スコアが与えられます。しかし、ジャンプボタンを押すとポイントが得られ、生き残ることができます。これはポジティブな結果であり、ポジティブな数値スコアが与えられるべきです。
+強化学習は、エージェント、いくつかの状態、および各状態ごとの行動のセットという3つの重要な概念を含みます。特定の状態で行動を実行すると、エージェントに報酬が与えられます。再びコンピューターゲームのスーパーマリオを想像してください。あなたはマリオで、ゲームのレベルにいて、崖の端に立っています。あなたの上にはコインがあります。マリオであり、ゲームのレベルの特定の位置にいる…それがあなたの状態です。右に一歩動く（行動すると）と崖から落ちてしまい、数値的に低いスコアが与えられます。しかし、ジャンプボタンを押すとポイントを獲得し、生き続けることができます。それは良い結果であり、正の数値スコアを与えられるべきです。
 
-強化学習とシミュレーター（ゲーム）を使用することで、ゲームをプレイして報酬を最大化する方法を学ぶことができます。報酬は生き残り、できるだけ多くのポイントを獲得することです。
+強化学習とシミュレーター（ゲーム）を使うことで、生き残り、できるだけ多くのポイントを獲得することを最大化するためのゲームのプレイ方法を学習できます。
 
-[![強化学習の紹介](https://img.youtube.com/vi/lDq_en8RNOo/0.jpg)](https://www.youtube.com/watch?v=lDq_en8RNOo)
+[![強化学習入門](https://img.youtube.com/vi/lDq_en8RNOo/0.jpg)](https://www.youtube.com/watch?v=lDq_en8RNOo)
 
-> 🎥 上の画像をクリックして、Dmitry が強化学習について話すのを聞いてみましょう
+> 🎥 上の画像をクリックして、Dmitryの強化学習についての解説を聞いてください
 
-## [講義前のクイズ](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/45/)
+## [事前講義クイズ](https://ff-quizzes.netlify.app/en/ml/)
 
 ## 前提条件とセットアップ
 
-このレッスンでは、Python でいくつかのコードを実験します。このレッスンの Jupyter Notebook コードを、自分のコンピュータ上またはクラウド上で実行できるようにしてください。
+このレッスンでは、Pythonでいくつかのコードを実験します。あなたのコンピューターかクラウドのどこかで、このレッスンのJupyter Notebookコードを実行できる必要があります。
 
-[レッスンノートブック](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/notebook.ipynb)を開いて、このレッスンを進めながら構築していくことができます。
+[レッスンのノートブック](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/notebook.ipynb)を開いて、このレッスンを進めてください。
 
-> **Note:** クラウドからこのコードを開く場合、ノートブックコードで使用される [`rlboard.py`](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/rlboard.py) ファイルも取得する必要があります。同じディレクトリに追加してください。
+> **注意：** クラウドからこのコードを開く場合、ノートブックコードで使用されている[`rlboard.py`](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/rlboard.py)ファイルも取得する必要があります。ノートブックと同じディレクトリに追加してください。
 
-## はじめに
+## イントロダクション
 
-このレッスンでは、ロシアの作曲家 [Sergei Prokofiev](https://en.wikipedia.org/wiki/Sergei_Prokofiev) による音楽童話に触発された **[ピーターと狼](https://en.wikipedia.org/wiki/Peter_and_the_Wolf)** の世界を探ります。**強化学習** を使用して、ピーターが環境を探索し、美味しいリンゴを集め、狼に出会わないようにします。
+このレッスンでは、ロシアの作曲家[セルゲイ・プロコフィエフ](https://en.wikipedia.org/wiki/Sergei_Prokofiev)による音楽童話に触発された<strong>[ピーターと狼](https://en.wikipedia.org/wiki/Peter_and_the_Wolf)</strong>の世界を探検します。<strong>強化学習</strong>を用いて、ピーターが環境を探検し、美味しいリンゴを集め、狼に会わないようにします。
 
-**強化学習** (RL) は、**エージェント** がいくつかの **環境** で最適な行動を学習するための技術です。エージェントはこの環境で **報酬関数** によって定義された **目標** を持つべきです。
+<strong>強化学習</strong>（RL）は、多くの実験を行うことで、ある<strong>環境</strong>における<strong>エージェント</strong>の最適な行動を学習する手法です。この環境のエージェントには、<strong>報酬関数</strong>によって定義される目標があります。
 
 ## 環境
 
-簡単にするために、ピーターの世界を次のような `width` x `height` のサイズの正方形のボードと考えます：
+単純化のために、ピーターの世界を `幅` x `高さ` の正方形の盤として考えましょう。このような感じです：
 
-![ピーターの環境](../../../../translated_images/environment.40ba3cb66256c93fa7e92f6f7214e1d1f588aafa97d266c11d108c5c5d101b6c.ja.png)
+![ピーターの環境](../../../../translated_images/ja/environment.40ba3cb66256c93f.webp)
 
-このボードの各セルは次のいずれかです：
+この盤上の各セルは以下のいずれかです：
 
-* **地面**: ピーターや他の生き物が歩ける場所。
-* **水**: 明らかに歩けない場所。
-* **木** または **草**: 休む場所。
-* **リンゴ**: ピーターが見つけて食べたいもの。
-* **狼**: 危険で避けるべきもの。
+* <strong>地面</strong>、ピーターや他の生き物が歩ける場所。
+* <strong>水</strong>、もちろん歩けない場所。
+* <strong>木</strong>や<strong>草</strong>、休憩できる場所。
+* <strong>リンゴ</strong>、ピーターが自分を養うために見つけたいもの。
+* <strong>狼</strong>、危険で避けるべきもの。
 
-この環境で動作するコードを含む別の Python モジュール [`rlboard.py`](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/rlboard.py) があります。このコードは概念の理解には重要ではないため、モジュールをインポートしてサンプルボードを作成します（コードブロック 1）：
+この環境で作業するコードは別のPythonモジュール、[`rlboard.py`](https://github.com/microsoft/ML-For-Beginners/blob/main/8-Reinforcement/1-QLearning/rlboard.py)にあります。概念理解には重要ではないため、このモジュールをインポートしてサンプル盤を作成します（コードブロック1）：
 
 ```python
 from rlboard import *
@@ -52,63 +52,63 @@ m.randomize(seed=13)
 m.plot()
 ```
 
-このコードは、上記の環境に似た画像を出力します。
+このコードは上記の環境に似た絵を表示するはずです。
 
-## アクションとポリシー
+## 行動と方策
 
-この例では、ピーターの目標は狼や他の障害物を避けながらリンゴを見つけることです。これを行うために、彼はリンゴを見つけるまで基本的に歩き回ることができます。
+この例でのピーターの目標は、狼や障害物を避けながらリンゴを見つけることです。つまり、リンゴを見つけるまで歩き回ることができます。
 
-したがって、任意の位置で、彼は次のアクションのいずれかを選択できます：上、下、左、右。
+したがって、どの位置でも次の4つの行動のうちの一つを選べます：上、下、左、右。
 
-これらのアクションを辞書として定義し、それらを対応する座標の変化のペアにマッピングします。例えば、右に移動する (`R`) would correspond to a pair `(1,0)` とします（コードブロック 2）：
+これらの行動は辞書として定義し、対応する座標変化のペアにマッピングします。例えば右に移動（`R`）はペア `(1,0)` に対応します。（コードブロック2）
 
 ```python
 actions = { "U" : (0,-1), "D" : (0,1), "L" : (-1,0), "R" : (1,0) }
 action_idx = { a : i for i,a in enumerate(actions.keys()) }
 ```
 
-まとめると、このシナリオの戦略と目標は次のとおりです：
+要約すると、このシナリオの戦略と目標は以下の通りです：
 
-- **戦略**: エージェント（ピーター）の戦略は **ポリシー** と呼ばれる関数によって定義されます。ポリシーは任意の状態でアクションを返す関数です。私たちの場合、問題の状態はプレイヤーの現在位置を含むボードによって表されます。
+- <strong>戦略</strong>：エージェント（ピーター）の戦略はいわゆる<strong>方策</strong>によって定義されます。方策は任意の状態での行動を返す関数です。ここで問題の状態は、プレイヤーの現在位置を含んだ盤で表されます。
 
-- **目標**: 強化学習の目標は、問題を効率的に解決するための良いポリシーを最終的に学習することです。ただし、基準として、最も単純なポリシーである **ランダムウォーク** を考えます。
+- <strong>目標</strong>：強化学習の目標は、問題を効率よく解く良い方策を最終的に学習することです。ただし基準として最も単純な方策である<strong>ランダムウォーク</strong>を考えます。
 
 ## ランダムウォーク
 
-まず、ランダムウォーク戦略を実装して問題を解決しましょう。ランダムウォークでは、許可されたアクションから次のアクションをランダムに選択し、リンゴに到達するまで繰り返します（コードブロック 3）。
+まずはランダムウォーク戦略を実装して問題を解きましょう。ランダムウォークでは、許可された行動の中から次の行動をランダムに選び、リンゴに到達するまで実行します（コードブロック3）。
 
-1. 以下のコードでランダムウォークを実装します：
+1. 以下のコードでランダムウォークを実装してください：
 
     ```python
     def random_policy(m):
         return random.choice(list(actions))
     
     def walk(m,policy,start_position=None):
-        n = 0 # number of steps
-        # set initial position
+        n = 0 # ステップ数
+        # 初期位置を設定
         if start_position:
             m.human = start_position 
         else:
             m.random_start()
         while True:
             if m.at() == Board.Cell.apple:
-                return n # success!
+                return n # 成功！
             if m.at() in [Board.Cell.wolf, Board.Cell.water]:
-                return -1 # eaten by wolf or drowned
+                return -1 # オオカミに食べられたか溺れた
             while True:
                 a = actions[policy(m)]
                 new_pos = m.move_pos(m.human,a)
                 if m.is_valid(new_pos) and m.at(new_pos)!=Board.Cell.water:
-                    m.move(a) # do the actual move
+                    m.move(a) # 実際の移動を行う
                     break
             n+=1
     
     walk(m,random_policy)
     ```
 
-    `walk` の呼び出しは、対応する経路の長さを返すべきです。これは実行ごとに異なる場合があります。
+    `walk` の呼び出しは、実行ごとに異なる場合がある対応パスの長さを返すはずです。
 
-1. ウォーク実験を何度か（例えば100回）実行し、結果の統計を出力します（コードブロック 4）：
+1. ウォーク実験を複数回（例: 100回）実行し、その結果の統計を出力してください（コードブロック4）：
 
     ```python
     def print_statistics(policy):
@@ -125,17 +125,17 @@ action_idx = { a : i for i,a in enumerate(actions.keys()) }
     print_statistics(random_policy)
     ```
 
-    経路の平均長さが約30〜40ステップであることに注意してください。これは、最も近いリンゴまでの平均距離が約5〜6ステップであることを考えると、かなり多いです。
+    パスの平均長さは30〜40歩前後で、最寄りのリンゴまでの平均距離5〜6歩と比較してかなり長いことに注意してください。
 
-    また、ランダムウォーク中のピーターの動きがどのように見えるかも確認できます：
+    また、ピーターの動きをランダムウォーク中に見ることもできます：
 
     ![ピーターのランダムウォーク](../../../../8-Reinforcement/1-QLearning/images/random_walk.gif)
 
 ## 報酬関数
 
-ポリシーをより知的にするためには、どの移動が他の移動よりも「良い」かを理解する必要があります。これを行うためには、目標を定義する必要があります。
+方策をより賢くするために、どの動きが「より良い」かを理解する必要があります。そのためには目標を定義します。
 
-目標は、各状態に対していくつかのスコア値を返す **報酬関数** の観点から定義できます。数値が高いほど、報酬関数が良いことを意味します（コードブロック 5）。
+目標は<strong>報酬関数</strong>で定義され、各状態に対してスコア値を返します。数値が高いほどより良い報酬となります。（コードブロック5）
 
 ```python
 move_reward = -0.1
@@ -154,70 +154,70 @@ def reward(m,pos=None):
     return move_reward
 ```
 
-報酬関数について興味深い点は、ほとんどの場合、*ゲームの最後にのみ実質的な報酬が与えられる* ことです。これは、アルゴリズムがポジティブな報酬につながる「良い」ステップを記憶し、それらの重要性を高める必要があることを意味します。同様に、悪い結果につながるすべての移動は抑制されるべきです。
+報酬関数で興味深いのは、多くの場合、<em>ゲームの最後にしか十分な報酬が与えられない</em>ことです。つまりアルゴリズムは最終的に正の報酬を得る「良い」ステップを覚えて重視し、逆に悪い結果を招く動きを抑制しなければなりません。
 
 ## Q学習
 
-ここで議論するアルゴリズムは **Q学習** と呼ばれます。このアルゴリズムでは、ポリシーは **Qテーブル** と呼ばれる関数（またはデータ構造）によって定義されます。これは、特定の状態で各アクションの「良さ」を記録します。
+ここで議論するアルゴリズムは<strong>Q-Learning</strong>と呼ばれます。このアルゴリズムでは、方策は<strong>Q-Table</strong>と呼ばれる関数（またはデータ構造）で定義されます。これは与えられた状態での各行動の「良さ」を記録します。
 
-Qテーブルと呼ばれるのは、それを表形式や多次元配列として表現するのが便利なためです。ボードのサイズが `width` x `height` であるため、`width` x `height` x `len(actions)` の形状を持つ numpy 配列を使用して Qテーブルを表現できます（コードブロック 6）。
+Q-Tableはしばしば表や多次元配列として表現されるためその名前が付いています。盤のサイズが `width` x `height` であるため、Q-Tableは形状 `width` x `height` x `len(actions)` のnumpy配列として表せます：（コードブロック6）
 
 ```python
 Q = np.ones((width,height,len(actions)),dtype=np.float)*1.0/len(actions)
 ```
 
-Qテーブルのすべての値を等しい値（この場合は 0.25）で初期化することに注意してください。これは、すべての状態でのすべての移動が等しく良いことを意味する「ランダムウォーク」ポリシーに対応します。Qテーブルを `plot` function in order to visualize the table on the board: `m.plot(Q)`.
+Q-Tableのすべての値を等しい値（ここでは0.25）で初期化しています。これは「ランダムウォーク」方策に対応し、各状態でのすべての動きが均等に良いことを意味します。Q-Tableを `plot` 関数に渡して盤上に可視化できます： `m.plot(Q)`。
 
-![Peter's Environment](../../../../translated_images/env_init.04e8f26d2d60089e128f21d22e5fef57d580e559f0d5937b06c689e5e7cdd438.ja.png)
+![ピーターの環境](../../../../translated_images/ja/env_init.04e8f26d2d60089e.webp)
 
-In the center of each cell there is an "arrow" that indicates the preferred direction of movement. Since all directions are equal, a dot is displayed.
+各セルの中央に「矢印」があり、好ましい移動方向を示します。すべての方向が等しい場合は点が表示されます。
 
-Now we need to run the simulation, explore our environment, and learn a better distribution of Q-Table values, which will allow us to find the path to the apple much faster.
+次にシミュレーションを実行し、環境を探検してQ-Tableの値の分布を改善し、リンゴへの経路をより速く見つけられるようにします。
 
-## Essence of Q-Learning: Bellman Equation
+## Q学習の本質：ベルマン方程式
 
-Once we start moving, each action will have a corresponding reward, i.e. we can theoretically select the next action based on the highest immediate reward. However, in most states, the move will not achieve our goal of reaching the apple, and thus we cannot immediately decide which direction is better.
+動き始めると、それぞれの行動には即時の報酬があり、理論的には最高の即時報酬に基づいて次の行動を選べます。しかしほとんどの状態では、この動きだけではリンゴに到達できず、どの方向が良いか即座に決められません。
 
-> Remember that it is not the immediate result that matters, but rather the final result, which we will obtain at the end of the simulation.
+> 大事なのは即時の結果ではなく、シミュレーションの終了時に得られる最終結果であることを覚えておいてください。
 
-In order to account for this delayed reward, we need to use the principles of **[dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming)**, which allow us to think about out problem recursively.
+遅延した報酬を考慮するために、<strong>[動的計画法](https://en.wikipedia.org/wiki/Dynamic_programming)</strong>の原理を用います。これにより問題を再帰的に考えることができます。
 
-Suppose we are now at the state *s*, and we want to move to the next state *s'*. By doing so, we will receive the immediate reward *r(s,a)*, defined by the reward function, plus some future reward. If we suppose that our Q-Table correctly reflects the "attractiveness" of each action, then at state *s'* we will chose an action *a* that corresponds to maximum value of *Q(s',a')*. Thus, the best possible future reward we could get at state *s* will be defined as `max`<sub>a'</sub>*Q(s',a')* (maximum here is computed over all possible actions *a'* at state *s'*).
+今、状態 *s* にいて、次に状態 *s'* に移動するとします。このとき、報酬関数で定義された即時報酬 *r(s,a)* と将来の報酬を受け取ります。もしQ-Tableが各行動の「魅力度」を正しく反映していると仮定すると、状態 *s'* では最大値の *Q(s',a')* を持つ行動 *a* を選びます。つまり、状態 *s* で得られる可能な最高の将来報酬は `max`<sub>a'</sub>*Q(s',a')* となります（ここで最大は状態 *s'* のすべての可能な行動 *a'* にわたって計算）。
 
-This gives the **Bellman formula** for calculating the value of the Q-Table at state *s*, given action *a*:
+これにより状態 *s*、行動 *a* におけるQ-Tableの値を計算する<strong>ベルマン方程式</strong>が得られます：
 
-<img src="images/bellman-equation.png"/>
+<img src="../../../../translated_images/ja/bellman-equation.7c0c4c722e5a6b7c.webp"/>
 
-Here γ is the so-called **discount factor** that determines to which extent you should prefer the current reward over the future reward and vice versa.
+ここで γ は<strong>割引率</strong>と呼ばれ、将来の報酬に対して現在の報酬をどの程度重視するかを決定します。
 
-## Learning Algorithm
+## 学習アルゴリズム
 
-Given the equation above, we can now write pseudo-code for our learning algorithm:
+上記の式に基づき、学習アルゴリズムの擬似コードは以下の通りです：
 
-* Initialize Q-Table Q with equal numbers for all states and actions
-* Set learning rate α ← 1
-* Repeat simulation many times
-   1. Start at random position
-   1. Repeat
-        1. Select an action *a* at state *s*
-        2. Execute action by moving to a new state *s'*
-        3. If we encounter end-of-game condition, or total reward is too small - exit simulation  
-        4. Compute reward *r* at the new state
-        5. Update Q-Function according to Bellman equation: *Q(s,a)* ← *(1-α)Q(s,a)+α(r+γ max<sub>a'</sub>Q(s',a'))*
+* すべての状態と行動で等しい値でQ-Table Qを初期化する
+* 学習率 α ← 1 に設定する
+* シミュレーションを多数回繰り返す
+   1. ランダムな位置から開始する
+   1. 繰り返す
+        1. 状態 *s* で行動 *a* を選択する
+        2. 行動を実行し新しい状態 *s'* に移動する
+        3. ゲーム終了条件に達したか報酬が小さすぎる場合はシミュレーションを終了する
+        4. 新しい状態で報酬 *r* を計算する
+        5. ベルマン方程式にしたがってQ関数を更新する： *Q(s,a)* ← *(1-α)Q(s,a)+α(r+γ max<sub>a'</sub>Q(s',a'))*
         6. *s* ← *s'*
-        7. Update the total reward and decrease α.
+        7. 合計報酬を更新し、αを減少させる
 
-## Exploit vs. explore
+## 活用と探索
 
-In the algorithm above, we did not specify how exactly we should choose an action at step 2.1. If we are choosing the action randomly, we will randomly **explore** the environment, and we are quite likely to die often as well as explore areas where we would not normally go. An alternative approach would be to **exploit** the Q-Table values that we already know, and thus to choose the best action (with higher Q-Table value) at state *s*. This, however, will prevent us from exploring other states, and it's likely we might not find the optimal solution.
+上記のアルゴリズムでは、ステップ2.1でどのように行動を選ぶかは明記していません。もし行動をランダムに選ぶなら環境をランダムに<strong>探索</strong>し、頻繁に死ぬことや通常は行かない場所を探検することになります。別の方法は、既知のQ-Tableの値を<strong>活用（エクスプロイト）</strong>し、状態 *s* で最も高いQ-Table値の行動を選ぶことです。しかしこれでは他の状態を探索できず最適解に到達できない可能性があります。
 
-Thus, the best approach is to strike a balance between exploration and exploitation. This can be done by choosing the action at state *s* with probabilities proportional to values in the Q-Table. In the beginning, when Q-Table values are all the same, it would correspond to a random selection, but as we learn more about our environment, we would be more likely to follow the optimal route while allowing the agent to choose the unexplored path once in a while.
+したがって、探索と活用のバランスが最善です。これはQ-Tableの値に比例した確率で行動を選択することで実現できます。はじめはQ-Tableの値がすべて同じなのでランダム選択となりますが、学習が進むにつれて最適経路を辿りつつもエージェントが時々未探索の経路を選べるようになります。
 
-## Python implementation
+## Python実装
 
-We are now ready to implement the learning algorithm. Before we do that, we also need some function that will convert arbitrary numbers in the Q-Table into a vector of probabilities for corresponding actions.
+これで学習アルゴリズムの実装準備が整いました。まずQ-Tableの任意の数値を対応する行動の確率ベクトルに変換する関数が必要です。
 
-1. Create a function `probs()` に渡すことができます：
+1. `probs()`関数を作成：
 
     ```python
     def probs(v,eps=1e-4):
@@ -226,17 +226,16 @@ We are now ready to implement the learning algorithm. Before we do that, we also
         return v
     ```
 
-    初期状態でベクトルのすべての成分が同一である場合に 0 で割ることを避けるために、元のベクトルにいくつかの `eps` を追加します。
+    初期状態でベクトルの全成分が同じ場合に0除算を避けるために、元のベクトルにいくつかの `eps` を加えています。
 
-5000回の実験（エポック）を通じて学習アルゴリズムを実行します（コードブロック 8）。
-
+5000回の実験、すなわち<strong>エポック</strong>で学習アルゴリズムを実行してください：（コードブロック8）
 ```python
     for epoch in range(5000):
     
-        # Pick initial point
+        # 初期地点を選択する
         m.random_start()
         
-        # Start travelling
+        # 移動を開始する
         n=0
         cum_reward = 0
         while True:
@@ -244,7 +243,7 @@ We are now ready to implement the learning algorithm. Before we do that, we also
             v = probs(Q[x,y])
             a = random.choices(list(actions),weights=v)[0]
             dpos = actions[a]
-            m.move(dpos,check_correctness=False) # we allow player to move outside the board, which terminates episode
+            m.move(dpos,check_correctness=False) # プレイヤーがボードの外に移動することを許可し、それがエピソードの終了となる
             r = reward(m)
             cum_reward += r
             if r==end_reward or cum_reward < -1000:
@@ -257,11 +256,13 @@ We are now ready to implement the learning algorithm. Before we do that, we also
             n+=1
 ```
 
-このアルゴリズムを実行した後、Qテーブルは各ステップでの異なるアクションの魅力を定義する値で更新されます。Qテーブルを視覚化して、各セルに小さな円を描くことで、移動の希望方向を示すベクトルをプロットすることができます。
+このアルゴリズム実行後、Q-Tableは各ステップで異なる行動の魅力度を定義する値で更新されます。Q-Tableを視覚化するため、各セルに移動方向を示すベクトルをプロットできます。単純化のために矢印の代わりに小さな円を描きます。
 
-## ポリシーの確認
+<img src="../../../../translated_images/ja/learned.ed28bcd8484b5287.webp"/>
 
-Qテーブルは各状態での各アクションの「魅力」をリストしているため、効率的なナビゲーションを定義するのに簡単に使用できます。最も簡単な場合、Qテーブルの値が最も高いアクションを選択できます（コードブロック 9）。
+## 方策の検証
+
+Q-Tableは各状態での行動の「魅力度」を示すため、これを使って効率的なナビゲーションが簡単に定義できます。最も単純には、最も高いQ-Table値に対応する行動を選択します：（コードブロック9）
 
 ```python
 def qpolicy_strict(m):
@@ -273,17 +274,18 @@ def qpolicy_strict(m):
 walk(m,qpolicy_strict)
 ```
 
-> 上記のコードを数回試してみると、時々「ハング」することがあり、ノートブックの STOP ボタンを押して中断する必要があることに気付くかもしれません。これは、最適な Q値の観点から2つの状態が互いに「指し示す」状況があり、その場合、エージェントが無限にその状態間を移動し続けるためです。
+
+> 上記のコードを何度か試すと、時々「ハング」してしまい、ノートブックのSTOPボタンを押して中断しなければならないことに気づくかもしれません。これは、最適なQ値の観点で2つの状態がお互いを「指している」状況が起きる可能性があり、その場合エージェントがそれらの状態間を無限に行き来してしまうために起こります。
 
 ## 🚀チャレンジ
 
-> **タスク 1:** `walk` function to limit the maximum length of path by a certain number of steps (say, 100), and watch the code above return this value from time to time.
+> **タスク1:** `walk`関数を修正して経路の最大長さを一定のステップ数（例えば100）に制限し、上記のコードが時々その値を返すのを確認してください。
 
-> **Task 2:** Modify the `walk` function so that it does not go back to the places where it has already been previously. This will prevent `walk` from looping, however, the agent can still end up being "trapped" in a location from which it is unable to escape.
+> **タスク2:** `walk`関数を修正して、既に訪れた場所に戻らないようにしてください。これにより`walk`のループは防げますが、エージェントが脱出不能な場所に「閉じ込められる」可能性は依然として残ります。
 
-## Navigation
+## ナビゲーション
 
-A better navigation policy would be the one that we used during training, which combines exploitation and exploration. In this policy, we will select each action with a certain probability, proportional to the values in the Q-Table. This strategy may still result in the agent returning back to a position it has already explored, but, as you can see from the code below, it results in a very short average path to the desired location (remember that `print_statistics` を修正して、シミュレーションを100回実行します（コードブロック 10）。
+より良いナビゲーション方針は、トレーニング中に用いたものと同じで、活用と探索を組み合わせたものです。この方針では、Qテーブルの値に比例した確率で各アクションを選択します。この戦略でもエージェントがすでに探索した位置に戻ることがありますが、以下のコードのように、目的地への平均経路は非常に短くなります（`print_statistics`はシミュレーションを100回実行することに注意してください）：(コードブロック 10)
 
 ```python
 def qpolicy(m):
@@ -295,26 +297,32 @@ def qpolicy(m):
 print_statistics(qpolicy)
 ```
 
-このコードを実行した後、以前よりも平均経路長がはるかに短くなり、3〜6の範囲になります。
+このコードを実行すると、平均経路長が以前よりかなり短くなり、3～6あたりの範囲になるはずです。
 
 ## 学習プロセスの調査
 
-学習プロセスは、問題空間の構造に関する獲得した知識の探索と探索のバランスです。学習の結果（エージェントが目標に到達するための短い経路を見つける能力）が向上したことがわかりましたが、学習プロセス中の平均経路長の変化を観察することも興味深いです。
+述べたように、学習プロセスは探索と獲得した知識の活用のバランスです。学習の結果（エージェントが短い経路で目標に到達する能力）が向上したことが分かりましたが、学習過程で平均経路長がどのように変化するか観察するのも興味深いです：
 
-学習の要点をまとめると：
+<img src="../../../../translated_images/ja/lpathlen1.0534784add58d4eb.webp"/>
 
-- **平均経路長の増加**。最初は平均経路長が増加します。これは、環境について何も知らないときに、悪い状態（水や狼）に閉じ込められやすいことが原因です。より多くを学び、この知識を使い始めると、環境をより長く探索できますが、リンゴの位置についてはまだよくわかりません。
+学習内容は以下の通りまとめられます：
 
-- **学習が進むにつれて経路長が減少**。十分に学習すると、エージェントが目標を達成するのが簡単になり、経路長が減少し始めます。ただし、探索は続けているため、最適な経路から逸れ、新しいオプションを探索することがあり、経路が最適より長くなることがあります。
+- <strong>平均経路長の増加</strong>。最初は平均経路長が増えます。これは環境について何も知らない状態で、悪い状態（水やオオカミ）に捕まる可能性が高いためと考えられます。知識が増え使い始めると環境をより長く探索できますが、リンゴの場所はまだよく分かっていません。
 
-- **突然の経路長の増加**。グラフで経路長が突然増加することもあります。これはプロセスの確率的な性質を示しており、新しい値で Qテーブルの係数を上書きすることで Qテーブルが「損なわれる」可能性があります。理想的には、学習率を低下させることでこれを最小限に抑えるべきです（例えば、学習の終わりに向かって、Qテーブルの値をわずかに調整する）。
+- <strong>学ぶにつれて経路長は短くなる</strong>。十分に学習できると、エージェントが目標を達成しやすくなり経路長が短くなります。ただし探索も続けるため、最適経路から外れて新しい選択肢を探しに行くことがあり、経路が最適より長くなってしまいます。
 
-全体として、学習プロセスの成功と質は、学習率、学習率の減衰、割引率などのパラメータに大きく依存することを覚えておくことが重要です。これらは **ハイパーパラメータ** と呼ばれ、**パラメータ** とは区別されます。パラメータは学習中に最適化するものであり（例えば、Qテーブルの係数）、最適なハイパーパラメータ値を見つけるプロセスは **ハイパーパラメータ最適化** と呼ばれ、別のトピックとして取り上げる価値があります。
+- <strong>経路長の突然の増加</strong>。このグラフではある時点で経路長が突然増えています。これはプロセスの確率的な性質を示しており、新しい値でQテーブルの係数を上書きして「壊してしまう」ことがあるためです。これを理想的には学習率を下げて抑えます（例えば、学習の最後の方ではQテーブルの値を少しずつしか調整しません）。
 
-## [講義後のクイズ](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/46/)
+全体として、学習率、学習率減衰、割引率などのパラメータが学習の成功と品質に大きく影響することを忘れないでください。これらはトレーニング中に最適化する<strong>パラメータ</strong>（例えばQテーブルの係数）と区別するために<strong>ハイパーパラメータ</strong>と呼ばれます。最適なハイパーパラメータを見つける過程は<strong>ハイパーパラメータ最適化</strong>と呼ばれ、別のトピックに値します。
+
+## [講義後クイズ](https://ff-quizzes.netlify.app/en/ml/)
 
 ## 課題 
 [より現実的な世界](assignment.md)
 
-**免責事項**:
-この文書は機械翻訳AIサービスを使用して翻訳されています。正確さを期していますが、自動翻訳には誤りや不正確さが含まれる場合がありますのでご注意ください。元の言語で記載された文書が信頼できる情報源と見なされるべきです。重要な情報については、専門の人間による翻訳をお勧めします。この翻訳の使用に起因する誤解や誤った解釈について、当社は一切の責任を負いません。
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**免責事項**：
+本書類は AI 翻訳サービス [Co-op Translator](https://github.com/Azure/co-op-translator) を使用して翻訳されています。正確性を期していますが、自動翻訳には誤りや不正確な部分が含まれる可能性があることをご承知おきください。原文の原語版が正式な情報源とみなされるべきです。重要な情報については、専門の人間による翻訳を推奨します。本翻訳の利用により生じたいかなる誤解や解釈違いについても、当方は責任を負いかねます。
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

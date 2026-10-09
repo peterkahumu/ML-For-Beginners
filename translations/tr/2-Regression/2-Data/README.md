@@ -1,62 +1,62 @@
 # Scikit-learn kullanarak bir regresyon modeli oluşturun: verileri hazırlayın ve görselleştirin
 
-![Veri görselleştirme infografiği](../../../../translated_images/data-visualization.54e56dded7c1a804d00d027543f2881cb32da73aeadda2d4a4f10f3497526114.tr.png)
+![Veri görselleştirme infografiği](../../../../translated_images/tr/data-visualization.54e56dded7c1a804.webp)
 
-İnfografik: [Dasani Madipalli](https://twitter.com/dasani_decoded)
+Infografik [Dasani Madipalli](https://twitter.com/dasani_decoded) tarafından
 
-## [Ders öncesi sınavı](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/11/)
+## [Ders öncesi quiz](https://ff-quizzes.netlify.app/en/ml/)
 
-> ### [Bu ders R dilinde de mevcut!](../../../../2-Regression/2-Data/solution/R/lesson_2.html)
+> ### [Bu ders R dilinde mevcut!](../../../../2-Regression/2-Data/solution/R/lesson_2.html)
 
 ## Giriş
 
-Scikit-learn ile makine öğrenimi modeli oluşturma araçlarını kurduğunuza göre, verileriniz hakkında sorular sormaya başlayabilirsiniz. Veri ile çalışırken ve ML çözümleri uygularken, verisetinizin potansiyelini doğru bir şekilde açığa çıkarmak için doğru soruyu sormayı anlamak çok önemlidir.
+Artık Scikit-learn ile makine öğrenimi modeli oluşturmaya başlamak için ihtiyaç duyduğunuz araçlara sahipsiniz, verilerinize soru sormaya başlayabilirsiniz. Verilerle çalışırken ve ML çözümleri uygularken, veri setinizin potansiyellerini doğru şekilde açığa çıkarmak için doğru soruyu sormanın çok önemli olduğunu anlamak gereklidir.
 
-Bu derste öğrenecekleriniz:
+Bu derste şunları öğreneceksiniz:
 
-- Verilerinizi model oluşturma için nasıl hazırlayacağınız.
-- Veri görselleştirme için Matplotlib'i nasıl kullanacağınız.
+- Model oluşturmak için verilerinizi nasıl hazırlayacağınızı.
+- Verileri görselleştirmek için Matplotlib'i nasıl kullanacağınızı.
+- Daha etkili veri görselleştirmesi için Seaborn'u nasıl kullanacağınızı.
 
 ## Verilerinize doğru soruyu sormak
 
-Yanıtlanması gereken soru, hangi tür ML algoritmalarını kullanacağınızı belirleyecektir. Ve alacağınız yanıtın kalitesi, verinizin doğasına büyük ölçüde bağlı olacaktır.
+Cevaplamanız gereken soru, nasıl bir ML algoritması kullanacağınızı belirleyecektir. Ve aldığınız cevabın kalitesi, verilerinizin doğasına büyük ölçüde bağlıdır.
 
-Bu ders için sağlanan [verilere](https://github.com/microsoft/ML-For-Beginners/blob/main/2-Regression/data/US-pumpkins.csv) bir göz atın. Bu .csv dosyasını VS Code'da açabilirsiniz. Hızlı bir göz gezdirdiğinizde hemen boşluklar ve karışık string ve sayısal veriler olduğunu görürsünüz. Ayrıca 'Package' adlı tuhaf bir sütun var, burada veriler 'sacks', 'bins' ve diğer değerler arasında karışmış durumda. Aslında veriler biraz dağınık.
+Bu derste verilen [veriye](https://github.com/microsoft/ML-For-Beginners/blob/main/2-Regression/data/US-pumpkins.csv) bir göz atın. Bu .csv dosyasını VS Code'da açabilirsiniz. Hızlıca bakıldığında boşluklar ve hem metin hem sayı içeren karışık veri olduğu görülür. Ayrıca 'Package' adında tuhaf bir sütun var; veriler burada 'sacks', 'bins' ve diğer değerlerin karışımı. Aslında veri biraz karışık.
 
-[![Yeni başlayanlar için ML - Bir Veri Setini Nasıl Analiz Edip Temizlersiniz](https://img.youtube.com/vi/5qGjczWTrDQ/0.jpg)](https://youtu.be/5qGjczWTrDQ "Yeni başlayanlar için ML - Bir Veri Setini Nasıl Analiz Edip Temizlersiniz")
+[![ML for beginners - Nasıl Veri Seti Analiz Edilir ve Temizlenir](https://img.youtube.com/vi/5qGjczWTrDQ/0.jpg)](https://youtu.be/5qGjczWTrDQ "ML for beginners - Nasıl Veri Seti Analiz Edilir ve Temizlenir")
 
-> 🎥 Yukarıdaki resme tıklayarak bu ders için verileri hazırlama sürecini gösteren kısa bir videoya ulaşabilirsiniz.
+> 🎥 Bu ders için verilerin hazırlanmasını gösteren kısa video için yukarıdaki resme tıklayın.
 
-Aslında, kutudan çıkar çıkmaz bir ML modeli oluşturmak için tamamen hazır bir veri setine sahip olmak çok yaygın değildir. Bu derste, standart Python kütüphanelerini kullanarak ham bir veri setini nasıl hazırlayacağınızı öğreneceksiniz. Ayrıca verileri görselleştirmek için çeşitli teknikleri öğreneceksiniz.
+Aslında, kutudan çıkar çıkmaz kullanıma tamamen hazır bir veri seti almak çok yaygın değildir. Bu derste, standart Python kütüphaneleri kullanarak ham bir veri setini nasıl hazırlayacağınızı öğreneceksiniz. Ayrıca verileri görselleştirmek için çeşitli teknikleri öğreneceksiniz.
 
-## Vaka çalışması: 'balkabağı pazarı'
+## Vaka çalışması: 'kabak pazarı'
 
-Bu klasörde, kök `data` klasöründe [US-pumpkins.csv](https://github.com/microsoft/ML-For-Beginners/blob/main/2-Regression/data/US-pumpkins.csv) adlı bir .csv dosyası bulacaksınız. Bu dosya, şehir bazında gruplandırılmış, balkabağı pazarı hakkında 1757 satır veri içerir. Bu veriler, ABD Tarım Bakanlığı tarafından dağıtılan [Özel Ürünler Terminal Pazarları Standart Raporları](https://www.marketnews.usda.gov/mnp/fv-report-config-step1?type=termPrice) adresinden çıkarılmış ham verilerdir.
+Bu klasörde, kök `data` klasörü içinde [US-pumpkins.csv](https://github.com/microsoft/ML-For-Beginners/blob/main/2-Regression/data/US-pumpkins.csv) adlı, şehir bazında gruplandırılmış kabak pazarı hakkında 1757 satırlık veri içeren bir .csv dosyası bulacaksınız. Bu, Amerika Birleşik Devletleri Tarım Bakanlığı tarafından dağıtılan [Özel Ürünler Terminal Pazarları Standart Raporlarından](https://www.marketnews.usda.gov/mnp/fv-report-config-step1?type=termPrice) çıkarılan ham veridir.
 
-### Verileri hazırlamak
+### Verileri hazırlama
 
-Bu veriler kamu malıdır. USDA web sitesinden şehir başına ayrı ayrı dosyalar olarak indirilebilir. Çok fazla ayrı dosya olmaması için, tüm şehir verilerini tek bir elektronik tabloya birleştirdik, böylece verileri biraz _hazırlamış_ olduk. Şimdi, verilere daha yakından bakalım.
+Bu veri kamu malıdır. USDA web sitesinden şehir başına çok sayıda ayrı dosya olarak indirilebilir. Çok fazla dosya olmasını önlemek için tüm şehir verilerini tek bir tabloya birleştirdik, böylece veriyi zaten biraz _hazırlamış_ olduk. Şimdi veriye daha yakından bakalım.
 
-### Balkabağı verileri - ilk sonuçlar
+### Kabak verisi - ilk çıkarımlar
 
-Bu veriler hakkında ne fark ediyorsunuz? Zaten stringler, sayılar, boşluklar ve anlamlandırmanız gereken tuhaf değerlerin karışımı olduğunu gördünüz.
+Bu veride ne fark ettiniz? Zaten içinde metinler, sayılar, boşluklar ve anlamlandırmanız gereken tuhaf değerler olduğunu gördünüz.
 
-Bu verilerle bir Regresyon tekniği kullanarak hangi soruyu sorabilirsiniz? "Belirli bir ayda satılık bir balkabağının fiyatını tahmin et" ne dersiniz? Verilere tekrar baktığınızda, bu görev için gerekli veri yapısını oluşturmak için bazı değişiklikler yapmanız gerektiğini görüyorsunuz.
+Bu veriye bir Regresyon tekniği kullanarak hangi soruyu sorabilirsiniz? Mesela "Belirli bir ayda satılan kabak fiyatını tahmin et". Veriye tekrar baktığınızda, görevi gerçekleştirmek için veri yapısında yapmanız gereken bazı değişiklikler var.
+## Alıştırma - kabak verisini analiz et
 
-## Alıştırma - balkabağı verilerini analiz et
+Bu kabak verisini analiz etmek ve hazırlamak için verileri şekillendirmede çok faydalı olan [Pandas](https://pandas.pydata.org/) (adı `Python Veri Analizi` anlamına gelir) aracını kullanalım.
 
-Bu balkabağı verilerini analiz etmek ve hazırlamak için verileri şekillendirmede çok yararlı bir araç olan [Pandas](https://pandas.pydata.org/) (adı `Python Data Analysis` anlamına gelir) kullanacağız.
+### İlk olarak, eksik tarihler için kontrol yapın
 
-### İlk olarak, eksik tarihleri kontrol edin
+Öncelikle eksik tarih olup olmadığını kontrol etmek için adımlar atmanız gerekiyor:
 
-İlk olarak eksik tarihleri kontrol etmek için adımlar atmanız gerekecek:
+1. Tarihleri ay formatına dönüştürün (bunlar ABD tarihleri, format `MM/DD/YYYY`).
+2. Ay bilgisini yeni bir sütuna çıkarın.
 
-1. Tarihleri ay formatına dönüştürün (bunlar ABD tarihleri, bu yüzden format `MM/DD/YYYY`).
-2. Ayı yeni bir sütuna çıkarın.
+Visual Studio Code'da _notebook.ipynb_ dosyasını açın ve tabloyu yeni bir Pandas dataframe'ine aktarın.
 
-_Notebook.ipynb_ dosyasını Visual Studio Code'da açın ve elektronik tabloyu yeni bir Pandas dataframe'ine aktarın.
-
-1. İlk beş satırı görüntülemek için `head()` işlevini kullanın.
+1. İlk beş satırı görmek için `head()` fonksiyonunu kullanın.
 
     ```python
     import pandas as pd
@@ -64,7 +64,7 @@ _Notebook.ipynb_ dosyasını Visual Studio Code'da açın ve elektronik tabloyu 
     pumpkins.head()
     ```
 
-    ✅ Son beş satırı görüntülemek için hangi işlevi kullanırdınız?
+    ✅ Son beş satırı görmek için hangi fonksiyonu kullanırsınız?
 
 1. Mevcut dataframe'de eksik veri olup olmadığını kontrol edin:
 
@@ -72,22 +72,22 @@ _Notebook.ipynb_ dosyasını Visual Studio Code'da açın ve elektronik tabloyu 
     pumpkins.isnull().sum()
     ```
 
-    Eksik veri var, ancak belki de bu görev için önemli olmayabilir.
+    Eksik veri var, ancak belki mevcut görev için önemli olmayabilir.
 
-1. Dataframe'inizi daha kolay çalışılabilir hale getirmek için yalnızca ihtiyacınız olan sütunları seçin, `loc` function which extracts from the original dataframe a group of rows (passed as first parameter) and columns (passed as second parameter). The expression `:` aşağıdaki durumda "tüm satırlar" anlamına gelir.
+1. Dataframe ile çalışmayı kolaylaştırmak için, yalnızca ihtiyacınız olan sütunları `loc` fonksiyonunu kullanarak seçin; bu fonksiyon orijinal dataframe'den satır grubunu (birinci parametre) ve sütun grubunu (ikinci parametre) ayıklar. Aşağıdaki durumda `:` ifadesi "tüm satırlar" anlamındadır.
 
     ```python
     columns_to_select = ['Package', 'Low Price', 'High Price', 'Date']
     pumpkins = pumpkins.loc[:, columns_to_select]
     ```
 
-### İkinci olarak, balkabağının ortalama fiyatını belirleyin
+### İkinci olarak, kabak fiyatının ortalamasını belirleyin
 
-Belirli bir ayda bir balkabağının ortalama fiyatını belirlemeyi düşünün. Bu görev için hangi sütunları seçerdiniz? İpucu: 3 sütuna ihtiyacınız olacak.
+Belirli bir ayda bir kabağın ortalama fiyatını nasıl belirleyeceğinizi düşünün. Bu görev için hangi sütunları seçersiniz? İpucu: 3 sütuna ihtiyacınız olacak.
 
-Çözüm: Yeni Fiyat sütununu doldurmak için `Low Price` and `High Price` sütunlarının ortalamasını alın ve Tarih sütununu yalnızca ayı gösterecek şekilde dönüştürün. Neyse ki, yukarıdaki kontrole göre tarihler veya fiyatlar için eksik veri yok.
+Çözüm: Yeni Fiyat sütununu doldurmak için `Low Price` ve `High Price` sütunlarının ortalamasını alın ve Tarih sütununu sadece ay gösterecek şekilde dönüştürün. Neyse ki yukarıdaki kontrole göre, tarihler veya fiyatlar için eksik veri yok.
 
-1. Ortalama hesaplamak için aşağıdaki kodu ekleyin:
+1. Ortalamayı hesaplamak için aşağıdaki kodu ekleyin:
 
     ```python
     price = (pumpkins['Low Price'] + pumpkins['High Price']) / 2
@@ -96,7 +96,7 @@ Belirli bir ayda bir balkabağının ortalama fiyatını belirlemeyi düşünün
 
     ```
 
-   ✅ `print(month)` kullanarak kontrol etmek istediğiniz herhangi bir veriyi yazdırabilirsiniz.
+   ✅ Kontrol etmek istediğiniz verileri `print(month)` ile yazdırmakta özgürsünüz.
 
 2. Şimdi, dönüştürdüğünüz verileri yeni bir Pandas dataframe'ine kopyalayın:
 
@@ -104,29 +104,29 @@ Belirli bir ayda bir balkabağının ortalama fiyatını belirlemeyi düşünün
     new_pumpkins = pd.DataFrame({'Month': month, 'Package': pumpkins['Package'], 'Low Price': pumpkins['Low Price'],'High Price': pumpkins['High Price'], 'Price': price})
     ```
 
-    Dataframe'inizi yazdırmak, yeni regresyon modelinizi oluşturabileceğiniz temiz, düzenli bir veri setini gösterecektir.
+    Dataframe'inizi yazdırmak, üzerine yeni regresyon modelinizi kurabileceğiniz temiz bir veri seti gösterecektir.
 
-### Ama bekleyin! Burada tuhaf bir şey var
+### Ama durun! Burada tuhaf bir şey var
 
-`Package` column, pumpkins are sold in many different configurations. Some are sold in '1 1/9 bushel' measures, and some in '1/2 bushel' measures, some per pumpkin, some per pound, and some in big boxes with varying widths.
+`Package` sütununa bakarsanız, kabaklar birçok farklı şekilde satılıyor. Bazıları '1 1/9 bushel' ölçüsünde, bazıları '1/2 bushel' ölçüsünde, bazıları tane başına, bazıları pound başına ve bazıları değişen genişlikte büyük kutularda satılıyor.
 
-> Pumpkins seem very hard to weigh consistently
+> Kabakların tartılması tutarlı şekilde çok zor görünüyor
 
-Digging into the original data, it's interesting that anything with `Unit of Sale` equalling 'EACH' or 'PER BIN' also have the `Package` type per inch, per bin, or 'each'. Pumpkins seem to be very hard to weigh consistently, so let's filter them by selecting only pumpkins with the string 'bushel' in their `Package` sütununa bakın.
+Orijinal veriye daha yakından baktığınızda, `Unit of Sale` 'EACH' veya 'PER BIN' olan kayıtların `Package` türü de inç başına, porsiyon başına ya da 'her biri' olarak gözüküyor. Kabaklar tutarlı tartılması zor görünüyor, o yüzden sadece `Package` sütununda 'bushel' geçen kabakları seçerek filtreleyelim.
 
-1. Dosyanın en üstüne, ilk .csv importunun altına bir filtre ekleyin:
+1. Dosyanın en üstüne, ilk .csv aktarımının altına bir filtre ekleyin:
 
     ```python
     pumpkins = pumpkins[pumpkins['Package'].str.contains('bushel', case=True, regex=True)]
     ```
 
-    Şimdi veriyi yazdırırsanız, yalnızca bushel ile satılan balkabaklarını içeren yaklaşık 415 satır veri aldığınızı görebilirsiniz.
+    Verileri şimdi yazdırırsanız sadece bushel bazında kabak içeren yaklaşık 415 satırı aldığınızı göreceksiniz.
 
-### Ama bekleyin! Yapılacak bir şey daha var
+### Ama durun! Daha yapılacak bir şey var
 
-Bushel miktarının satır başına değiştiğini fark ettiniz mi? Fiyatlandırmayı normalize etmeniz ve bushel başına fiyatı göstermeniz gerekiyor, bu yüzden standartlaştırmak için biraz matematik yapın.
+Bushel miktarının satır satır değiştiğini fark ettiniz mi? Fiyatlandırmayı normalize etmeniz gerekiyor, böylece fiyatları bushel başına gösterebilirsiniz, bunu standart hale getirmek için biraz matematik yapın.
 
-1. Yeni_pumpkins dataframe'ini oluşturma bloğunun ardından bu satırları ekleyin:
+1. Aşağıdaki satırları new_pumpkins dataframe'i oluşturma bloğunun sonrasına ekleyin:
 
     ```python
     new_pumpkins.loc[new_pumpkins['Package'].str.contains('1 1/9'), 'Price'] = price/(1 + 1/9)
@@ -134,38 +134,38 @@ Bushel miktarının satır başına değiştiğini fark ettiniz mi? Fiyatlandır
     new_pumpkins.loc[new_pumpkins['Package'].str.contains('1/2'), 'Price'] = price/(1/2)
     ```
 
-✅ [The Spruce Eats](https://www.thespruceeats.com/how-much-is-a-bushel-1389308) göre, bushel'in ağırlığı ürün türüne bağlı olarak değişir, çünkü bu bir hacim ölçümüdür. "Örneğin, bir bushel domatesin 56 pound ağırlığında olması gerekiyor... Yapraklar ve yeşillikler daha az ağırlıkla daha fazla yer kaplar, bu yüzden bir bushel ıspanak sadece 20 pound." Bu oldukça karmaşık! Bushel'den pound'a dönüşüm yapmak yerine bushel başına fiyatlandırma yapalım. Ancak, balkabağı bushels'ı üzerine yapılan bu çalışma, verinizin doğasını anlamanın ne kadar önemli olduğunu gösteriyor!
+✅ [The Spruce Eats](https://www.thespruceeats.com/how-much-is-a-bushel-1389308) sitesine göre, bir bushelin ağırlığı ürün türüne bağlıdır çünkü bu bir hacim ölçüsüdür. "Örneğin bir bushel domatesin ağırlığı 56 pound olmalıdır... Yapraklar ve yeşillikler daha az ağırlıkla daha fazla yer kaplar, bu yüzden bir bushel ıspanak sadece 20 pounddur." Bu iş oldukça karmaşık! Bushel'den pound'a dönüşüm yapmaya çalışma, bunun yerine bushel bazında fiyatlandır. Yine de bu kabak bushel çalışması, verinizin doğasını anlamanın ne kadar önemli olduğunu gösterir!
 
-Şimdi, bushel ölçümlerine dayalı olarak birim başına fiyatlandırmayı analiz edebilirsiniz. Veriyi bir kez daha yazdırırsanız, nasıl standartlaştırıldığını görebilirsiniz.
+Artık bushel ölçümüne göre birim fiyatlandırmayı analiz edebilirsiniz. Veriyi yeniden yazdırdığınızda nasıl standart hale geldiğini görebilirsiniz.
 
-✅ Yarım bushel ile satılan balkabaklarının çok pahalı olduğunu fark ettiniz mi? Nedenini bulabilir misiniz? İpucu: Küçük balkabakları büyük olanlardan çok daha pahalıdır, muhtemelen bushel başına çok daha fazla olmalarından dolayı, büyük boş bir turta balkabağı tarafından kullanılan boş alan nedeniyle.
+✅ Yarım bushel ile satılan kabakların çok pahalı olduğunu fark ettiniz mi? Nedenini çözebilir misiniz? İpucu: Küçük kabaklar büyük olanlardan çok daha pahalı, muhtemelen bushel başına çok daha fazla olmalarından dolayı, çünkü büyük boşluklu bir kabak bushel'ü kullanışsız hale getiriyor.
 
 ## Görselleştirme Stratejileri
 
-Veri bilimcilerinin rolü, çalıştıkları verilerin kalitesini ve doğasını göstermektir. Bunu yapmak için, genellikle verilerin farklı yönlerini gösteren ilginç görselleştirmeler, grafikler ve tablolar oluştururlar. Bu şekilde, görsel olarak ilişkileri ve keşfedilmesi zor boşlukları gösterebilirler.
+Veri bilimcisinin görevlerinden biri, üzerinde çalıştığı verilerin kalitesini ve doğasını göstermektir. Bunu yapmak için genellikle verinin farklı yönlerini gösteren ilginç görselleştirmeler, grafikler ve çizelgeler oluştururlar. Bu yolla, görsel olarak başka türlü keşfedilmesi zor olan ilişkileri ve boşlukları gösterebilirler.
 
-[![Yeni başlayanlar için ML - Matplotlib ile Veriler Nasıl Görselleştirilir](https://img.youtube.com/vi/SbUkxH6IJo0/0.jpg)](https://youtu.be/SbUkxH6IJo0 "Yeni başlayanlar için ML - Matplotlib ile Veriler Nasıl Görselleştirilir")
+[![ML for beginners - Matplotlib ile Veriyi Görselleştirme](https://img.youtube.com/vi/SbUkxH6IJo0/0.jpg)](https://youtu.be/SbUkxH6IJo0 "ML for beginners - Matplotlib ile Veriyi Görselleştirme")
 
-> 🎥 Yukarıdaki resme tıklayarak bu ders için verileri görselleştirme sürecini gösteren kısa bir videoya ulaşabilirsiniz.
+> 🎥 Bu ders için veriyi görselleştirmeyi anlatan kısa video için yukarıdaki resme tıklayın.
 
-Görselleştirmeler, veriler için en uygun makine öğrenimi tekniğini belirlemeye de yardımcı olabilir. Örneğin, bir çizgiye benzeyen bir scatterplot, verilerin doğrusal regresyon için iyi bir aday olduğunu gösterir.
+Görselleştirmeler ayrıca veriye en uygun makine öğrenimi tekniğini belirlemeye yardımcı olabilir. Örneğin bir dağılım grafiğinin bir çizgiyi takip ediyormuş gibi görünmesi, verinin doğrusal regresyon için iyi bir aday olduğunu gösterir.
 
-Jupyter defterlerinde iyi çalışan bir veri görselleştirme kütüphanesi [Matplotlib](https://matplotlib.org/) (önceki derste de gördünüz).
+Jupyter notebok'larında iyi çalışan veri görselleştirme kütüphanelerinden biri [Matplotlib](https://matplotlib.org/)'dir (önceki derslerde de gördünüz).
 
-> Veri görselleştirme ile daha fazla deneyim kazanmak için [bu eğitimlere](https://docs.microsoft.com/learn/modules/explore-analyze-data-with-python?WT.mc_id=academic-77952-leestott) göz atın.
+> Veri görselleştirme konusunda daha fazla deneyim kazanmak için [bu öğreticilere](https://docs.microsoft.com/learn/modules/explore-analyze-data-with-python?WT.mc_id=academic-77952-leestott) bakın.
 
-## Alıştırma - Matplotlib ile deney yapın
+## Alıştırma - Matplotlib ile denemeler yapın
 
-Yeni oluşturduğunuz dataframe'i göstermek için bazı temel grafikler oluşturmaya çalışın. Temel bir çizgi grafiği ne gösterir?
+Az önce oluşturduğunuz yeni dataframe'i göstermek için bazı temel grafikler oluşturmaya çalışın. Basit bir çizgi grafiği ne gösterirdi?
 
-1. Dosyanın en üstüne, Pandas importunun altına Matplotlib'i ekleyin:
+1. Dosyanın başında, Pandas importundan sonra Matplotlib'i içe aktarın:
 
     ```python
     import matplotlib.pyplot as plt
     ```
 
-1. Tüm defteri yeniden çalıştırarak yenileyin.
-1. Defterin altına, veriyi kutu olarak çizmek için bir hücre ekleyin:
+1. Tüm not defterini tekrar çalıştırarak yenileyin.
+1. Not defterinin en altına, veriyi bir kutu grafiği olarak çizdirmek için bir hücre ekleyin:
 
     ```python
     price = new_pumpkins.Price
@@ -174,15 +174,15 @@ Yeni oluşturduğunuz dataframe'i göstermek için bazı temel grafikler oluştu
     plt.show()
     ```
 
-    ![Fiyat ile ay arasındaki ilişkiyi gösteren bir scatterplot](../../../../translated_images/scatterplot.b6868f44cbd2051c6680ccdbb1510697d06a3ff6cd4abda656f5009c0ed4e3fc.tr.png)
+    ![Ay-fiyat ilişkisini gösteren bir dağılım grafiği](../../../../translated_images/tr/scatterplot.b6868f44cbd2051c.webp)
 
-    Bu faydalı bir grafik mi? Sizi şaşırtan bir şey var mı?
+    Bu kullanışlı bir grafik mi? Size şaşırtıcı gelen herhangi bir şey var mı?
 
-    Bu çok faydalı değil çünkü verilerinizi belirli bir ayda yayılmış noktalar olarak gösterir.
+    Bu çok kullanışlı değil çünkü sadece verilerinizin belirli ayda yayılmış noktalar olarak gösterilmesini sağlıyor.
 
-### Onu faydalı hale getirin
+### Daha kullanışlı hale getirin
 
-Grafiklerin faydalı veriler göstermesi için genellikle verileri bir şekilde gruplamanız gerekir. Y ekseninde ayları gösteren ve verilerin dağılımını gösteren bir grafik oluşturmaya çalışalım.
+Grafiklerde faydalı veri göstermek için genellikle verileri bir şekilde gruplamanız gerekir. Y ekseninde ayların gösterildiği ve verilerin dağılımını ortaya koyan bir grafik oluşturalım.
 
 1. Gruplandırılmış bir çubuk grafik oluşturmak için bir hücre ekleyin:
 
@@ -191,25 +191,104 @@ Grafiklerin faydalı veriler göstermesi için genellikle verileri bir şekilde 
     plt.ylabel("Pumpkin Price")
     ```
 
-    ![Fiyat ile ay arasındaki ilişkiyi gösteren bir çubuk grafik](../../../../translated_images/barchart.a833ea9194346d769c77a3a870f7d8aee51574cd1138ca902e5500830a41cbce.tr.png)
+    ![Ay-fiyat ilişkisini gösteren bir çubuk grafik](../../../../translated_images/tr/barchart.a833ea9194346d76.webp)
 
-    Bu daha faydalı bir veri görselleştirme! Balkabağı fiyatlarının en yüksek olduğu dönemlerin Eylül ve Ekim olduğunu gösteriyor gibi görünüyor. Bu beklentinizi karşılıyor mu? Neden veya neden değil?
+    Bu daha faydalı bir veri görselleştirmesi! Kabak fiyatlarının en yüksek olduğu ayların Eylül ve Ekim gibi görünüyor. Bu beklediğinizle uyuşuyor mu? Neden ya da neden değil?
+
+## Alıştırma - Seaborn ile denemeler yapın
+
+Matplotlib güçlüdür, ancak şık grafikler oluşturmak için çok kod gerekebilir. [Seaborn](https://seaborn.pydata.org/), Matplotlib üzerine inşa edilmiş istatistiksel veri görselleştirme için tasarlanmış bir kütüphanedir. Pandas dataframe'leriyle doğrudan çalışır, çekici varsayılan stiller uygular ve çok daha az kodla bilgilendirici grafikler oluşturmanızı sağlar. Seaborn Matplotlib nesneleri döndürdüğü için Matplotlib ile bildiğiniz her şeyi sonuçları ince ayar yapmak için hala kullanabilirsiniz.
+
+> Eğer henüz Seaborn yüklü değilse, `pip install seaborn` komutuyla yükleyin.
+
+1. Not defterinin başında, diğer importların altına Seaborn'u import edin. Geleneksel olarak `sns` olarak import edilir:
+
+    ```python
+    import seaborn as sns
+    ```
+
+### İlişkileri göstermek için dağılım grafikleri
+
+Model oluşturmadan önce veriyi keşfetmenin önemli bir parçası değişkenler arasındaki _ilişkileri_ aramaktır. [Dağılım grafiği](https://en.wikipedia.org/wiki/Scatter_plot) bunun en iyi araçlarından biridir: eğer noktalar bir çizgiyi takip ediyorsa, iki değişken korele olabilir ve bu, doğrusal regresyon modeli çalıştırmaya uygun bir işarettir.
+
+1. Önceden oluşturduğunuz ay-fiyat dağılım grafiğini bu kez Seaborn'un dataframe sütunlarıyla direkt çalışan [`relplot()`](https://seaborn.pydata.org/generated/seaborn.relplot.html) (ilişkisel grafik) fonksiyonunu kullanarak yeniden oluşturun:
+
+    ```python
+    sns.relplot(x="Price", y="Month", data=new_pumpkins)
+    ```
+
+    ![Seaborn dağılım grafiği ile ay-fiyat ilişkisi](../../../../translated_images/tr/relplot.a03837d8f0329cec.webp)
+
+    Sütun adlarını ve dataframe'i nasıl verdiğinize dikkat edin, Seaborn eksen etiketlerini sizin için otomatik ayarlıyor.
+
+2. `kind="line"` parametresi vererek çizgi grafik geçişi yapabilirsiniz. Seaborn ayrıca çizginin etrafında güven aralığını gösteren gölgeli bir bant çizer:
+
+    ```python
+    sns.relplot(x="Price", y="Month", kind="line", data=new_pumpkins)
+    ```
+
+    ![Seaborn çizgi grafiği ile ay-fiyat ilişkisi](../../../../translated_images/tr/lineplot.f9034ba47b1e30ee.webp)
+
+    Bu veri biraz gürültülü olduğu için çizgi grafik en net tercih değil — ancak Seaborn'da grafik türlerini ne kadar kolay değiştirebileceğinizi gösteriyor.
+
+### Dağılımları göstermek için çubuk grafikler
+
+
+Önceden Matplotlib ile bir çubuk grafik oluşturmak için verileri elle gruplayıp toplamıştınız. Seaborn'un [`catplot()`](https://seaborn.pydata.org/generated/seaborn.catplot.html) (kategorik grafik) fonksiyonu gruplama ve toplama işlemlerini sizin için yapabilir. Varsayılan olarak `kind="bar"` her kategorinin ortalamasını gösterirken, güven aralığını belirten siyah bir çizgi de yer alır.
+
+1. Aylık ortalama fiyatın çubuk grafiğini oluşturun:
+
+    ```python
+    sns.catplot(x="Month", y="Price", data=new_pumpkins, kind="bar")
+    ```
+
+    ![Aylık fiyat dağılımını gösteren bir Seaborn çubuk grafiği](../../../../translated_images/tr/catplot.e73fc35fdf96242b.webp)
+
+    Bu, Matplotlib ile gördüğünüzü doğrular — fiyatlar Eylül ve Ekim civarında zirve yapar — ancak Seaborn ayrıca her ay içindeki fiyat _değişkenliğini_ görselleştirir.
+
+### Korelasyonları göstermek için Isı Haritaları
+
+Serpilmiş grafikler aynı anda iki değişkeni karşılaştırır. Birden fazla sayısal sütun olduğunda, bir [ısı haritası](https://en.wikipedia.org/wiki/Heat_map) aynı anda _her_ sütun çiftinin ilişkisini görmenizi sağlar. Bu, modele hangi sütunların besleneceğine karar verirken en çok ilişkilendirilen özellikleri bulmak için yaygın bir yöntemdir (ayrıca benzer bir grafik sınıflandırmada karışıklık matrislerini göstermek için kullanılır).
+
+1. Pandas ile bir korelasyon matrisi oluşturun, sonra Seaborn'un [`heatmap()`](https://seaborn.pydata.org/generated/seaborn.heatmap.html) fonksiyonuyla çizin. `annot=True` seçeneği her hücreye korelasyon değerlerini yazdırır:
+
+    ```python
+    correlations = new_pumpkins[['Month', 'Low Price', 'High Price', 'Price']].corr()
+    sns.heatmap(correlations, annot=True, cmap="coolwarm")
+    ```
+
+    ![Sayısal sütunlar arasındaki korelasyonları gösteren bir Seaborn ısı haritası](../../../../translated_images/tr/heatmap.bd98dce43b404c57.webp)
+
+    `1` (veya `-1`) değerine yakın olanlar, sütunların güçlü _doğrusal_ ilişki içinde olduğunu gösterir. `Low Price` ve `High Price` neredeyse mükemmel şekilde korelasyonludur. Öte yandan, `Month`, fiyat ile ancak zayıf bir doğrusal ilişkiye sahiptir — üstteki çubuk grafik Eylül ve Ekim’de belirgin bir mevsimlik zirveyi ortaya koysa da. Bu önemli bir derstir: korelasyon katsayısı yalnızca _düz çizgi_ ilişkilerini ölçer, bu yüzden mevsimsel ya da doğrusal olmayan desenleri kaçırabilir. ✅ Hangi sütunların kullanılacağına karar vermeden önce hem ısı haritasına *hem* çubuk grafik gibi görsellere bakmak neden faydalıdır?
+
+### Matplotlib mi Seaborn mu?
+
+İki kütüphane de bilinmeye değerdir:
+
+- **Matplotlib** her grafik elemanını ince detaylı kontrol etmenizi sağlar ve neredeyse diğer tüm Python grafik kütüphanelerinin temelidir.
+- **Seaborn** istatistiksel grafikler için daha üst seviye fonksiyonlar ve çekici varsayılanlar sunar, doğrudan dataframe'lerle çalışır ve keşifsel veri analizinde genellikle daha hızlıdır.
+
+Yaygın bir iş akışı, verinizi hızlıca keşfetmek için Seaborn'u kullanmak, sonra detayları özelleştirmek gerektiğinde Matplotlib'e geçmektir.
 
 ---
 
-## 🚀Meydan okuma
+## 🚀Zorluk
 
-Matplotlib'in sunduğu farklı görselleştirme türlerini keşfedin. Hangi türler regresyon problemleri için en uygundur?
+Matplotlib ve Seaborn’un sunduğu farklı görselleştirme türlerini keşfedin. Regresyon problemleri için hangi türler daha uygundur?
 
-## [Ders sonrası sınavı](https://gray-sand-07a10f403.1.azurestaticapps.net/quiz/12/)
+## [Ders sonrası quiz](https://ff-quizzes.netlify.app/en/ml/)
 
-## İnceleme ve Kendi Kendine Çalışma
+## Gözden Geçirme & Kendi Kendine Çalışma
 
-Verileri görselleştirmenin birçok yoluna bir göz atın. Mevcut çeşitli kütüphanelerin bir listesini yapın ve hangi tür görevler için en uygun olduklarını not edin, örneğin 2D görselleştirmeler vs. 3D görselleştirmeler. Ne keşfediyorsunuz?
+Veriyi görselleştirmenin pek çok yoluna bir bakın. Kullanılabilir çeşitli kütüphanelerin bir listesini yapın ve belirli görevler için (örneğin 2D görselleştirmeler vs 3D görselleştirmeler) hangilerinin en uygun olduğunu not edin. Neler keşfediyorsunuz?
 
 ## Ödev
 
-[Görselleştirmeyi keşfetmek](assignment.md)
+[Görselleştirme keşfi](assignment.md)
 
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
 **Feragatname**:
-Bu belge, makine tabanlı yapay zeka çeviri hizmetleri kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlıklar içerebileceğini lütfen unutmayın. Orijinal belgenin kendi dilindeki hali yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi tavsiye edilir. Bu çevirinin kullanımından kaynaklanan yanlış anlamalar veya yanlış yorumlamalardan sorumlu değiliz.
+Bu belge, AI çeviri hizmeti [Co-op Translator](https://github.com/Azure/co-op-translator) kullanılarak çevrilmiştir. Doğruluk için çaba sarf etsek de, otomatik çevirilerin hata veya yanlışlık içerebileceğini lütfen unutmayınız. Orijinal belge, kendi dilinde yetkili kaynak olarak kabul edilmelidir. Kritik bilgiler için profesyonel insan çevirisi önerilir. Bu çevirinin kullanımı sonucu ortaya çıkabilecek yanlış anlamalardan veya yanlış yorumlamalardan sorumlu değiliz.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->
